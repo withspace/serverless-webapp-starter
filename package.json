@@ -1,0 +1,29 @@
+{
+  "name": "serverless-webapp-starter",
+  "version": "1.0.0",
+  "description": "Serverless web application starter with Webpack, React.js and Amazon Cognito.",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --content-base app --port 9090 --inline --hot",
+    "build": "webpack",
+    "test": "ava 'app/**/*.test.js' --verbose --require ./other/setup-ava-tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withspace/serverless-webapp-starter.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/withspace/serverless-webapp-starter/issues"
+  },
+  "homepage": "https://github.com/withspace/serverless-webapp-starter#readme",
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.4.0",
+    "babel-preset-react": "^6.23.0",
+    "html-webpack-plugin": "^2.28.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  }
+}
