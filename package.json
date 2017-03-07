@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --content-base app --port 9090 --inline --hot",
     "build": "webpack",
-    "test": "ava 'app/**/*.test.js' --verbose --require ./other/setup-ava-tests.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
