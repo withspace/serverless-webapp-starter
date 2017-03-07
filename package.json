@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/withspace/serverless-webapp-starter.git"
   },
-  "author": "",
+  "author": "Jakub Dzikowski",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/withspace/serverless-webapp-starter/issues"
