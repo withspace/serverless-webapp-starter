@@ -1,10 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import injectTapEventPlugin from "react-tap-event-plugin";
 
-class HelloReactJS extends React.Component {
-  render() {
-    return <div>Serverless WebApp Starter</div>;
-  }
-}
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
-ReactDOM.render(<HelloReactJS />, document.getElementById('app'));
+
+ReactDOM.render(<App />, document.getElementById('app'));
