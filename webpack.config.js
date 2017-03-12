@@ -11,6 +11,11 @@ const BabelLoader = {
   loader: "babel-loader"
 };
 
+const CSSLoader = {
+  test: /\.css$/,
+  loader: "css-loader"
+};
+
 module.exports = {
   entry: [
     './app/index.js'
@@ -20,7 +25,7 @@ module.exports = {
     filename: "index_bundle.js"
   },
   module: {
-    loaders: [BabelLoader]
+    loaders: [BabelLoader, CSSLoader]
   },
   plugins: [HtmlWebpackPluginConfig]
 };
