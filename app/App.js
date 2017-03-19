@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {BrowserRouter as Router} from "react-router-dom";
-import getRoutes from "./router";
+import Routes from "./Routes";
 import Header from "./header/Header";
 import {MuiThemeProvider} from "material-ui";
 
@@ -10,7 +10,7 @@ const App = () => (
     <Router>
       <div>
         <Header/>
-        {getRoutes()}
+        <Routes/>
       </div>
     </Router>
   </MuiThemeProvider>

@@ -10,7 +10,7 @@ import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 const styles = {
   title: {
     cursor: 'pointer',
-    'text-decoration': 'none',
+    textDecoration: 'none',
     color: 'inherit'
   }
 };
@@ -42,7 +42,7 @@ const getProfileMenu = (handleSignOut) => (
 class Header extends Component {
 
   state = {
-    signedIn: false,
+    signedIn: false
   };
 
   handleSignIn = () => {
@@ -58,7 +58,9 @@ class Header extends Component {
       <AppBar
         title={<Link to="/" style={styles.title}>Serverless WebApp Starter</Link>}
         onTitleTouchTap={this.goHome}
-        iconElementRight={this.state.signedIn ? getProfileMenu(this.handleSignOut) : getSignInButton(this.handleSignIn)}
+        iconElementRight={
+          this.state.signedIn ? getProfileMenu(this.handleSignOut) : getSignInButton(this.handleSignIn)
+        }
       />
     );
   };
