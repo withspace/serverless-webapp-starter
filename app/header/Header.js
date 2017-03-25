@@ -39,31 +39,14 @@ const getProfileMenu = (handleSignOut) => (
   </IconMenu>
 );
 
-class Header extends Component {
-
-  state = {
-    signedIn: false
-  };
-
-  handleSignIn = () => {
-    this.setState({signedIn: true})
-  };
-
-  handleSignOut = () => {
-    this.setState({signedIn: false});
-  };
-
-  render() {
-    return (
-      <AppBar
-        title={<Link to="/" style={styles.title}>Serverless WebApp Starter</Link>}
-        onTitleTouchTap={this.goHome}
-        iconElementRight={
-          this.state.signedIn ? getProfileMenu(this.handleSignOut) : getSignInButton(this.handleSignIn)
-        }
-      />
-    );
-  };
-}
+const Header = (props) => (
+  <AppBar
+    title={<Link to="/" style={styles.title}>Serverless WebApp Starter</Link>}
+    onTitleTouchTap={this.goHome}
+    iconElementRight={
+      props.user.signedIn ? getProfileMenu(props.auth.handleSignOut) : getSignInButton(props.auth.handleSignIn)
+    }
+  />
+);
 
 export default Header;
