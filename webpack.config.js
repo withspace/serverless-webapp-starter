@@ -13,7 +13,7 @@ const BabelLoader = {
 
 const CSSLoader = {
   test: /\.css$/,
-  loader: "style-loader!css-loader"
+  loader: "style-loader!css-loader?modules!postcss-loader"
 };
 
 module.exports = {

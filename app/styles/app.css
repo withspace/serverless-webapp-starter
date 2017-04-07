@@ -5,3 +5,7 @@ body {
 h1 {
     font-weight: normal;
 }
+
+nav button {
+    color: inherit !important;
+}
