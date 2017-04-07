@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import AppBar from "material-ui/AppBar";
 import FlatButton from "material-ui/FlatButton";
@@ -15,10 +15,10 @@ const styles = {
   }
 };
 
-const getSignInButton = (handleSignIn) => (
+const getSignInButton = () => (
   <FlatButton
     label="Sign In"
-    onTouchTap={handleSignIn}
+    containerElement={<Link to="/profile/sign-in"/>}
   />
 );
 
@@ -30,7 +30,7 @@ const getProfileMenu = (handleSignOut) => (
   >
     <MenuItem
       primaryText="Profile"
-      containerElement={<Link to="/profile"/>}
+      containerElement={<Link to="/profile/home"/>}
     />
     <MenuItem
       primaryText="Sign out"
@@ -44,7 +44,7 @@ const Header = (props) => (
     title={<Link to="/" style={styles.title}>Serverless WebApp Starter</Link>}
     onTitleTouchTap={this.goHome}
     iconElementRight={
-      props.user.signedIn ? getProfileMenu(props.auth.handleSignOut) : getSignInButton(props.auth.handleSignIn)
+      props.user.signedIn ? getProfileMenu(props.auth.handleSignOut) : getSignInButton()
     }
   />
 );

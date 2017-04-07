@@ -42,7 +42,7 @@ class App extends Component {
         <Router>
           <div>
             <Header auth={this.auth} user={this.state.user}/>
-            <Routes user={this.state.user}/>
+            <Routes auth={this.auth} user={this.state.user}/>
           </div>
         </Router>
       </MuiThemeProvider>

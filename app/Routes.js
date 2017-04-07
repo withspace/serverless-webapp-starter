@@ -1,21 +1,12 @@
 import React from "react";
-import {Route, Redirect} from "react-router-dom";
 import {Home} from "./home/Home";
-import {Profile} from "./profile/Profile";
+import ProfileRoutes from "./profile/ProfileRoutes";
+import {DefaultRoute} from "./common/routes";
 
-const PrivateRoute = ({component: Component, user, ...rest}) => (
-  <Route
-    {...rest}
-    render={(props) => user.signedIn === true
-      ? <Component {...props} />
-      : <Redirect to={{pathname: '/', state: {from: props.location}}}/>}
-  />
-);
-
-const Routes = (props) => (
+const Routes = ({user, auth, ...rest}) => (
   <div>
-    <Route exact path="/" component={Home}/>
-    <PrivateRoute path="/profile" component={Profile} user={props.user}/>
+    <DefaultRoute exact path="/" component={Home}/>
+    <ProfileRoutes user={user} auth={auth}/>
   </div>
 );
 
