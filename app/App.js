@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {BrowserRouter as Router} from "react-router-dom";
 import Routes from "./Routes";
 import Header from "./header/Header";
-import {MuiThemeProvider} from "material-ui";
+import {Layout} from "react-toolbox/lib/layout";
 
 class Auth {
 
@@ -38,14 +38,14 @@ class App extends Component {
 
   render() {
     return (
-      <MuiThemeProvider>
+      <Layout>
         <Router>
           <div>
             <Header auth={this.auth} user={this.state.user}/>
             <Routes auth={this.auth} user={this.state.user}/>
           </div>
         </Router>
-      </MuiThemeProvider>
+      </Layout>
     );
   }
 }
