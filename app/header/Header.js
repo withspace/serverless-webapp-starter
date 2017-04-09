@@ -9,27 +9,33 @@ const styles = {
   title: {
     cursor: 'pointer',
     textDecoration: 'none',
-    color: 'inherit'
+    color: 'inherit',
+    textTransform: 'uppercase',
+    marginLeft: '24px'
   }
 };
 
-const getSignInButton = (handleSignIn) => (
-  <Button label="Sign In" onClick={handleSignIn} flat primary/>
+const SignInButtons = ({auth}) => (
+  <div>
+    <Button>Register</Button>
+    <Link style={styles.title} to="/profile/register">Register</Link>
+    <Link style={styles.title} to="/profile/sign-in">Sign In</Link>
+  </div>
 );
 
-const getProfileMenu = (handleSignOut) => (
+const ProfileMenu = ({auth}) => (
   <IconMenu icon="more_vert" position="topRight" menuRipple>
     <MenuItem value="profile">
-      <Link to="/profile" style={styles.title}>Profile</Link>
+      <Link to="/profile/home" style={styles.title}>Profile</Link>
     </MenuItem>
-    <MenuItem value="signOut" caption="Sign out" onClick={handleSignOut}/>
+    <MenuItem value="signOut" caption="Sign out" onClick={auth.handleSignOut}/>
   </IconMenu>
 );
 
 const Header = (props) => (
-  <AppBar title="React Toolbox" leftIcon="menu">
+  <AppBar title="Serverless WebApp Starter" leftIcon="menu">
     <Navigation type="horizontal">
-      {props.user.signedIn ? getProfileMenu(props.auth.handleSignOut) : getSignInButton(props.auth.handleSignIn)}
+      {props.user.signedIn ? <ProfileMenu auth={props.auth}/> : <SignInButtons auth={props.auth}/>}
     </Navigation>
   </AppBar>
 );

@@ -1,34 +1,50 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import RaisedButton from "material-ui/RaisedButton";
-import TextField from "material-ui/TextField";
-import FlatButton from "material-ui/FlatButton";
-import {Card, CardActions, CardText, CardTitle} from "material-ui/Card";
+import {Button} from "react-toolbox/lib/button";
+import {Input} from "react-toolbox/lib/input";
 
-const Register = (user, auth, ...rest) => (
-  <Card>
-    <CardText>
-      <h1>Register</h1>
-      <TextField
-        hintText="E-mail Address"
-        floatingLabelText="E-mail Address"
-      /><br />
-      <TextField
-        hintText="Password"
-        floatingLabelText="Password"
-        type="password"
-      /><br />
-      <TextField
-        hintText="Repeat Password"
-        floatingLabelText="Repeat Password"
-        type="password"
-      /><br />
-    </CardText>
-    <CardActions>
-      <RaisedButton label="Register" primary={true} onTouchTap={auth.handleSignIn}/>
-      <FlatButton label="Sign In" containerElement={<Link to="/profile/sign-in"/>}/>
-    </CardActions>
-  </Card>
-);
+class Register extends React.Component {
+
+  state = {email: '', password: '', passwordRepeated: ''};
+
+  handleChange = (name, value) => {
+    this.setState({...this.state, [name]: value});
+  };
+
+  register = () => {
+    console.log('Registration flow not implemented yet');
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>Register</h1>
+        Already registered? <Link to="/profile/sign-in">Sign in</Link> or <Link to="/profile/confirm-registration">confirm registration</Link>.
+        <Input
+          type='text'
+          label='E-mail Address'
+          name='email'
+          value={this.state.email}
+          onChange={this.handleChange.bind(this, 'email')}
+        />
+        <Input
+          type='password'
+          label='Password'
+          name='password'
+          value={this.state.password}
+          onChange={this.handleChange.bind(this, 'password')}
+        />
+        <Input
+          type='password'
+          label='Repeat password'
+          name='passwordRepeated'
+          value={this.state.passwordRepeated}
+          onChange={this.handleChange.bind(this, 'passwordRepeated')}
+        />
+        <Button label='Register' onClick={this.register} raised primary/>
+      </div>
+    );
+  }
+}
 
 export default Register;

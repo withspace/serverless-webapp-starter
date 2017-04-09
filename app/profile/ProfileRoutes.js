@@ -5,12 +5,6 @@ import SignIn from "./SignIn";
 import Register from "./Register";
 import ConfirmRegistration from "./ConfirmRegistration";
 
-const SignInOrRegister = ({user, auth}) => (
-  <div>
-    <SignIn user="user" auth="auth"/>
-  </div>
-);
-
 const ProfileRoutes = ({user, auth, ...rest}) => (
   <div>
     <PublicRoute path="/profile/sign-in" component={SignIn} user={user} auth={auth}/>

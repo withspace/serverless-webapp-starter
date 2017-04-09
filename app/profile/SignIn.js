@@ -1,32 +1,37 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import RaisedButton from "material-ui/RaisedButton";
-import TextField from "material-ui/TextField";
-import FlatButton from "material-ui/FlatButton";
-import {Card, CardActions, CardText, CardTitle} from "material-ui/Card";
+import {Input} from "react-toolbox/lib/input"
+import {Button} from "react-toolbox/lib/button"
 
-const SignIn = ({auth, ...rest}) => (
-  <Card>
-    <CardTitle
-      title="Sign In"
-    />
-    <CardText>
-      <h1>Sign In</h1>
-      <TextField
-        hintText="E-mail Address"
-        floatingLabelText="E-mail Address"
-      /><br />
-      <TextField
-        hintText="Password"
-        floatingLabelText="Password"
-        type="password"
-      /><br />
-    </CardText>
-    <CardActions>
-      <RaisedButton label="Sign in" primary={true} onTouchTap={auth.handleSignIn}/>
-      <FlatButton label="Register" containerElement={<Link to="/profile/register"/>}/>
-    </CardActions>
-  </Card>
-);
+class SignIn extends React.Component {
+
+  state = {email: '', password: ''};
+
+  handleChange = (name, value) => {
+    this.setState({...this.state, [name]: value});
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>Sign In</h1>
+        <Input
+          type='text'
+          label='E-mail Address'
+          name='email'
+          value={this.state.email}
+          onChange={this.handleChange.bind(this, 'email')}
+        />
+        <Input
+          type='password'
+          label='Password'
+          name='password'
+          value={this.state.password}
+          onChange={this.handleChange.bind(this, 'password')}
+        />
+        <Button label='Sign in' onClick={this.props.auth.handleSignIn} raised primary/>
+      </div>
+    );
+  }
+}
 
 export default SignIn;
