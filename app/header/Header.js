@@ -4,6 +4,7 @@ import {Button} from "react-toolbox/lib/button";
 import {IconMenu, MenuItem} from "react-toolbox/lib/menu";
 import {Navigation} from "react-toolbox/lib/navigation";
 import {AppBar} from "react-toolbox/lib/app_bar";
+import {goTo} from "../common/history";
 
 const styles = {
   title: {
@@ -17,7 +18,6 @@ const styles = {
 
 const SignInButtons = ({auth}) => (
   <div>
-    <Button>Register</Button>
     <Link style={styles.title} to="/profile/register">Register</Link>
     <Link style={styles.title} to="/profile/sign-in">Sign In</Link>
   </div>
