@@ -20,15 +20,12 @@ class Auth {
 
 }
 
-const updateUserStateIn = component => user => {
-  console.log('Update user', user);
-  const newState = Object.assign(component.state, {user: user});
-  component.setState(newState);
-};
-
 class App extends Component {
 
-  auth = new Auth(updateUserStateIn(this));
+  auth = new Auth(user => {
+    console.log('Update user', user);
+    this.setState({...this.state, user});
+  });
 
   state = {
     user: {
