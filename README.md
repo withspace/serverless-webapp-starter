@@ -1,5 +1,9 @@
-# serverless-webapp-starter
-Serverless web application starter with Webpack, React.js and Amazon Cognito.
+# Serverless WebApp Starter
 
-This is the very beginning of the project described in my blog post (in Polish): [https://dzikowski.github.io/daj-sie-poznac/2017/03/01/start-small/](https://dzikowski.github.io/daj-sie-poznac/2017/03/01/start-small/).
-Please come back in a while and you will find valuable content :-)
+[![Build Status](https://travis-ci.org/withspace/serverless-webapp-starter.svg?branch=master)](https://travis-ci.org/withspace/serverless-webapp-starter)
+[![dependencies Status](https://david-dm.org/withspace/serverless-webapp-starter/status.svg)](https://david-dm.org/withspace/serverless-webapp-starter)
+[![devDependencies Status](https://david-dm.org/withspace/serverless-webapp-starter/dev-status.svg)](https://david-dm.org/withspace/serverless-webapp-starter?type=dev)
+
+Serverless web application starter with Webpack, React.js and Amazon Cognito.
+**Work in progress**.
+
