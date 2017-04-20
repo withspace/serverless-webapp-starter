@@ -1,39 +1,32 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {Button} from "react-toolbox/lib/button";
-import {IconMenu, MenuItem} from "react-toolbox/lib/menu";
 import {Navigation} from "react-toolbox/lib/navigation";
 import {AppBar} from "react-toolbox/lib/app_bar";
+import ProfileMenu from "./ProfileMenu";
 
 const styles = {
   title: {
     cursor: 'pointer',
     textDecoration: 'none',
-    color: 'inherit'
+    color: 'inherit',
+    textTransform: 'uppercase',
+    marginLeft: '24px'
   }
 };
 
-const getSignInButton = (handleSignIn) => (
-  <Button label="Sign In" onClick={handleSignIn} flat primary/>
+const SignInButtons = ({auth}) => (
+  <div>
+    <Link style={styles.title} to="/profile/register">Register</Link>
+    <Link style={styles.title} to="/profile/sign-in">Sign In</Link>
+  </div>
 );
 
-const getProfileMenu = (handleSignOut) => (
-  <IconMenu icon="more_vert" position="topRight" menuRipple>
-    <MenuItem value="profile">
-      <Link to="/profile" style={styles.title}>Profile</Link>
-    </MenuItem>
-    <MenuItem value="signOut" caption="Sign out" onClick={handleSignOut}/>
-  </IconMenu>
-);
-
-
-const Header = (props) => (
-  <AppBar title="React Toolbox" leftIcon="menu">
+const Header = ({auth, user}) => (
+  <AppBar title="Serverless WebApp Starter" leftIcon="menu">
     <Navigation type="horizontal">
-      {props.user.signedIn ? getProfileMenu(props.auth.handleSignOut) : getSignInButton(props.auth.handleSignIn)}
+      {user.signedIn ? <ProfileMenu auth={auth}/> : <SignInButtons auth={auth}/>}
     </Navigation>
   </AppBar>
 );
-
 
 export default Header;
