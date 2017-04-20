@@ -19,7 +19,8 @@ class Register extends React.Component {
     return (
       <div>
         <h1>Register</h1>
-        Already registered? <Link to="/profile/sign-in">Sign in</Link> or <Link to="/profile/confirm-registration">confirm registration</Link>.
+        Already registered? <Link to="/profile/sign-in">Sign in</Link> or <Link to="/profile/confirm-registration">confirm
+        registration</Link>.
         <Input
           type='text'
           label='E-mail Address'

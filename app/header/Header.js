@@ -1,10 +1,8 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {Button} from "react-toolbox/lib/button";
-import {IconMenu, MenuItem} from "react-toolbox/lib/menu";
 import {Navigation} from "react-toolbox/lib/navigation";
 import {AppBar} from "react-toolbox/lib/app_bar";
-import {goTo} from "../common/history";
+import ProfileMenu from "./ProfileMenu";
 
 const styles = {
   title: {
@@ -21,15 +19,6 @@ const SignInButtons = ({auth}) => (
     <Link style={styles.title} to="/profile/register">Register</Link>
     <Link style={styles.title} to="/profile/sign-in">Sign In</Link>
   </div>
-);
-
-const ProfileMenu = ({auth}) => (
-  <IconMenu icon="more_vert" position="topRight" menuRipple>
-    <MenuItem value="profile">
-      <Link to="/profile/home" style={styles.title}>Profile</Link>
-    </MenuItem>
-    <MenuItem value="signOut" caption="Sign out" onClick={auth.handleSignOut}/>
-  </IconMenu>
 );
 
 const Header = (props) => (

@@ -3,7 +3,6 @@ import {BrowserRouter as Router} from "react-router-dom";
 import Routes from "./Routes";
 import Header from "./header/Header";
 import {Layout} from "react-toolbox/lib/layout";
-import {history} from "./common/history"
 
 class Auth {
 
@@ -37,7 +36,7 @@ class App extends Component {
   render() {
     return (
       <Layout>
-        <Router history={history}>
+        <Router>
           <div>
             <Header auth={this.auth} user={this.state.user}/>
             <div style={{margin: '0 3em'}}>
