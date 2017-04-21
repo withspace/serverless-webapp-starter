@@ -3,6 +3,10 @@ import {IconMenu, MenuItem} from "react-toolbox/lib/menu";
 
 class ProfileMenu extends Component {
 
+  static contextTypes = {
+    router: React.PropTypes.object
+  };
+
   navigateTo = path => () => {
     this.context.router.history.push(path);
   };
@@ -16,9 +20,5 @@ class ProfileMenu extends Component {
     );
   }
 }
-
-ProfileMenu.contextTypes = {
-  router: React.PropTypes.object
-};
 
 export default ProfileMenu;
