@@ -7,14 +7,14 @@ class ProfileMenu extends Component {
     router: React.PropTypes.object
   };
 
-  navigateTo = path => () => {
-    this.context.router.history.push(path);
+  openProfile = () => {
+    this.context.router.history.push('/profile/home');
   };
 
   render() {
     return (
       <IconMenu icon="more_vert" position="topRight" menuRipple>
-        <MenuItem value="profile" caption="Profile" onClick={this.navigateTo("/profile/home")}/>
+        <MenuItem value="profile" caption="Profile" onClick={this.openProfile}/>
         <MenuItem value="signOut" caption="Sign out" onClick={this.props.auth.handleSignOut}/>
       </IconMenu>
     );
