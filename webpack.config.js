@@ -5,6 +5,12 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body'
 });
 
+const webpack = require('webpack');
+const EnvironmentPluginConfig = new webpack.EnvironmentPlugin([
+  'COGNITO_POOL_ID',
+  'COGNITO_APP_CLIENT_ID'
+]);
+
 const BabelLoader = {
   test: /\.js$/,
   exclude: /node_modules/,
@@ -27,5 +33,5 @@ module.exports = {
   module: {
     loaders: [BabelLoader, CSSLoader]
   },
-  plugins: [HtmlWebpackPluginConfig]
+  plugins: [HtmlWebpackPluginConfig, EnvironmentPluginConfig]
 };

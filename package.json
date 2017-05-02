@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Serverless web application starter with Webpack, React.js and Amazon Cognito.",
   "scripts": {
-    "start": "webpack-dev-server --content-base app --port 9090 --inline --hot",
+    "start": "COGNITO_POOL_ID='myPool123' COGNITO_APP_CLIENT_ID='myAppClient456' webpack-dev-server --content-base app --port 9090 --inline --hot",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
