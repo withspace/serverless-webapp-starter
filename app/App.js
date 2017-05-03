@@ -3,22 +3,8 @@ import {BrowserRouter as Router} from "react-router-dom";
 import Routes from "./Routes";
 import Header from "./header/Header";
 import {Layout} from "react-toolbox/lib/layout";
-
-class Auth {
-
-  constructor(updateUser) {
-    this.updateUser = updateUser;
-  }
-
-  handleSignIn = () => this.updateUser({
-    signedIn: true
-  });
-
-  handleSignOut = () => this.updateUser({
-    signedIn: false
-  });
-
-}
+import User from "./profile/User";
+import Auth from "./profile/Auth";
 
 class App extends Component {
 
@@ -28,9 +14,7 @@ class App extends Component {
   });
 
   state = {
-    user: {
-      signedIn: false
-    }
+    user: new User(null, false)
   };
 
   render() {
