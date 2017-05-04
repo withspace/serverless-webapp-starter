@@ -29,7 +29,7 @@ const CSSLoader = {
 
 const JSONLoader = {
   test: /\.json$/,
-  loader: 'json'
+  loader: 'json-loader'
 };
 
 module.exports = {
