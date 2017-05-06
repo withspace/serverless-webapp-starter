@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {Button} from "react-toolbox/lib/button";
 import {Input} from "react-toolbox/lib/input";
 import CognitoService from "./CognitoService";
@@ -24,8 +24,8 @@ class Register extends React.Component {
   register = () => {
 
     const onSuccess = (user) => {
-      this.setState({...emptyState(), success: true});
       this.props.auth.updateUser(user);
+      this.setState({...emptyState(), success: true});
     };
 
     const onFailure = (error) => {
@@ -70,9 +70,9 @@ class Register extends React.Component {
           onChange={this.handleChange.bind(this, 'passwordRepeated')}
         />
         {this.state.error && <ErrorMessage text={this.state.error.message}/>}
-        {this.state.loading ?
-          <Loader text="Registering user..."/> :
-          <Button label='Register' onClick={this.register} raised primary/>
+        {this.state.loading
+          ? <Loader text="Registering user..."/>
+          : <Button label='Register' onClick={this.register} raised primary/>
         }
         {this.state.success && <Redirect push={true} to="/profile/confirm-registration"/>}
       </div>

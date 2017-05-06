@@ -4,8 +4,8 @@ import {Button} from "react-toolbox/lib/button"
 import CognitoService from "./CognitoService";
 import {ErrorMessage, Loader} from "../common/messages"
 
-const initialState = () => (  {
-  email: '',
+const initialState = (user) => ({
+  email: user && user.email || '',
   password: '',
   error: null,
   loading: false
@@ -13,7 +13,7 @@ const initialState = () => (  {
 
 class SignIn extends React.Component {
 
-  state = initialState();
+  state = initialState(this.props.user);
 
   handleChange = (name, value) => {
     this.setState({...this.state, [name]: value});
@@ -22,7 +22,7 @@ class SignIn extends React.Component {
   signIn = () => {
 
     const onSuccess = (user) => {
-      this.setState({...initialState()});
+      this.setState({...initialState(user)});
       this.props.auth.handleSignIn(user);
     };
 

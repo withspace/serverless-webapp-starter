@@ -5,8 +5,8 @@ import {Input} from "react-toolbox/lib/input";
 import CognitoService from "./CognitoService";
 import {ErrorMessage, Loader} from "../common/messages"
 
-const emptyState = () => ({
-  email: '',
+const emptyState = (user) => ({
+  email: user && user.email || '',
   code: '',
   error: null,
   loading: false
@@ -14,7 +14,7 @@ const emptyState = () => ({
 
 class ConfirmRegistration extends React.Component {
 
-  state = emptyState();
+  state = emptyState(this.props.user);
 
   handleChange = (name, value) => {
     this.setState({...this.state, [name]: value});
@@ -23,7 +23,7 @@ class ConfirmRegistration extends React.Component {
   confirmRegistration = () => {
 
     const onSuccess = (user) => {
-      this.setState({...emptyState(), success: true})
+      this.setState({...emptyState(user), success: true})
     };
 
     const onFailure = (error) => {
@@ -79,9 +79,9 @@ class ConfirmRegistration extends React.Component {
           onChange={this.handleChange.bind(this, 'code')}
         />
         {this.state.error && <ErrorMessage text={this.state.error.message}/>}
-        {this.state.loading ?
-          <Loader text="Confirming registration code..."/> :
-          <div>
+        {this.state.loading
+          ? <Loader text="Confirming registration code..."/>
+          : <div>
             <Button label='Confirm registration' onClick={this.confirmRegistration} raised primary/>
             &nbsp;
             <Button label='Request code again' onClick={this.requestCodeAgain}/>
