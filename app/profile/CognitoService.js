@@ -73,11 +73,23 @@ const signIn = ({email, password, onSuccess, onFailure}) => {
   });
 };
 
+const signOut = ({email, onSuccess}) => {
+
+  const cognitoUser = new CognitoUser({
+    Username: email,
+    Pool: userPool
+  });
+
+  cognitoUser.signOut();
+  onSuccess();
+};
+
 const CognitoService = {
   register: register,
   confirmRegistration: confirmRegistration,
   requestCodeAgain: requestCodeAgain,
-  signIn: signIn
+  signIn: signIn,
+  signOut: signOut
 };
 
 export default CognitoService;
