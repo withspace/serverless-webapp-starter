@@ -1,19 +1,49 @@
 import React from "react";
 import {Input} from "react-toolbox/lib/input"
 import {Button} from "react-toolbox/lib/button"
+import CognitoService from "./CognitoService";
+import {ErrorMessage, Loader} from "../common/messages"
+
+const initialState = () => (  {
+  email: '',
+  password: '',
+  error: null,
+  loading: false
+});
 
 class SignIn extends React.Component {
 
-  state = {email: '', password: ''};
+  state = initialState();
 
   handleChange = (name, value) => {
     this.setState({...this.state, [name]: value});
   };
 
+  signIn = () => {
+
+    const onSuccess = (user) => {
+      this.setState({...initialState()});
+      this.props.auth.handleSignIn(user);
+    };
+
+    const onFailure = (error) => {
+      this.setState({...this.state, error: error, loading: false});
+    };
+
+    this.setState({...this.state, loading: true});
+
+    CognitoService.signIn({
+      email: this.state.email,
+      password: this.state.password,
+      onSuccess: onSuccess,
+      onFailure: onFailure
+    });
+  };
+
   render() {
     return (
       <div>
-        <h1>Sign In</h1>
+        <h1>Sign in</h1>
         <Input
           type='text'
           label='E-mail Address'
@@ -28,7 +58,11 @@ class SignIn extends React.Component {
           value={this.state.password}
           onChange={this.handleChange.bind(this, 'password')}
         />
-        <Button label='Sign in' onClick={this.props.auth.handleSignIn} raised primary/>
+        {this.state.error && <ErrorMessage text={this.state.error.message}/>}
+        {this.state.loading ?
+          <Loader text="Signing in..."/> :
+          <Button label='Sign in' onClick={this.signIn} raised primary/>
+        }
       </div>
     );
   }

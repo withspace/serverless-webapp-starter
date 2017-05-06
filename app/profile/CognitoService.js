@@ -55,11 +55,29 @@ const requestCodeAgain = ({email, onSuccess, onFailure}) => {
   });
 };
 
+const signIn = ({email, password, onSuccess, onFailure}) => {
+
+  const authenticationDetails = new AuthenticationDetails({
+    Username: email,
+    Password: password
+  });
+
+  const cognitoUser = new CognitoUser({
+    Username: email,
+    Pool: userPool
+  });
+
+  cognitoUser.authenticateUser(authenticationDetails, {
+    onSuccess: (response) => onSuccess(new User(email, true)),
+    onFailure: (error) => onFailure(error)
+  });
+};
 
 const CognitoService = {
   register: register,
   confirmRegistration: confirmRegistration,
-  requestCodeAgain: requestCodeAgain
+  requestCodeAgain: requestCodeAgain,
+  signIn: signIn
 };
 
 export default CognitoService;

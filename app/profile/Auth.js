@@ -10,7 +10,7 @@ class Auth {
     console.log('register', event);
   };
 
-  handleSignIn = () => this.updateUser(new User('user@example.com', true));
+  handleSignIn = (user) => this.updateUser(user);
 
   handleSignOut = () => this.updateUser(new User(null, false));
 
