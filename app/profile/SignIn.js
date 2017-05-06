@@ -1,19 +1,19 @@
 import React from "react";
 import {Input} from "react-toolbox/lib/input"
 import {Button} from "react-toolbox/lib/button"
-import CognitoService from "./CognitoService";
 import {ErrorMessage, Loader} from "../common/messages"
-
-const initialState = (user) => ({
-  email: user && user.email || '',
-  password: '',
-  error: null,
-  loading: false
-});
 
 class SignIn extends React.Component {
 
-  state = initialState(this.props.user);
+  emptyState = () => ({
+    email: this.props.user.email || '',
+    password: '',
+    error: null,
+    loading: false,
+    success: false
+  });
+
+  state = this.emptyState();
 
   handleChange = (name, value) => {
     this.setState({...this.state, [name]: value});
@@ -21,18 +21,17 @@ class SignIn extends React.Component {
 
   signIn = () => {
 
-    const onSuccess = (user) => {
-      this.setState({...initialState(user)});
-      this.props.auth.handleSignIn(user);
+    const onSuccess = () => {
+      // nothing
     };
 
     const onFailure = (error) => {
       this.setState({...this.state, error: error, loading: false});
     };
 
-    this.setState({...this.state, loading: true});
+    this.setState({...this.state, password: '', loading: true});
 
-    CognitoService.signIn({
+    this.props.auth.signIn({
       email: this.state.email,
       password: this.state.password,
       onSuccess: onSuccess,

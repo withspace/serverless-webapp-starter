@@ -9,7 +9,6 @@ import Auth from "./profile/Auth";
 class App extends Component {
 
   auth = new Auth(user => {
-    console.log('Update user', user);
     this.setState({...this.state, user});
   });
 

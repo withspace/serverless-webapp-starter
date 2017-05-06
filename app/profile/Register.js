@@ -2,20 +2,20 @@ import React from "react";
 import {Link, Redirect} from "react-router-dom";
 import {Button} from "react-toolbox/lib/button";
 import {Input} from "react-toolbox/lib/input";
-import CognitoService from "./CognitoService";
 import {ErrorMessage, Loader} from "../common/messages"
-
-const emptyState = () => ({
-  email: '',
-  password: '',
-  passwordRepeated: '',
-  error: null,
-  loading: false
-});
 
 class Register extends React.Component {
 
-  state = emptyState();
+  emptyState = () => ({
+    email: '',
+    password: '',
+    passwordRepeated: '',
+    error: null,
+    loading: false,
+    success: false
+  });
+
+  state = this.emptyState();
 
   handleChange = (name, value) => {
     this.setState({...this.state, [name]: value});
@@ -23,9 +23,8 @@ class Register extends React.Component {
 
   register = () => {
 
-    const onSuccess = (user) => {
-      this.props.auth.updateUser(user);
-      this.setState({...emptyState(), success: true});
+    const onSuccess = () => {
+      this.setState({...this.emptyState(), success: true});
     };
 
     const onFailure = (error) => {
@@ -34,7 +33,7 @@ class Register extends React.Component {
 
     this.setState({...this.state, loading: true});
 
-    CognitoService.register({
+    this.props.auth.register({
       email: this.state.email,
       password: this.state.password,
       onSuccess: onSuccess,
@@ -46,8 +45,8 @@ class Register extends React.Component {
     return (
       <div>
         <h1>Register</h1>
-        Already registered? <Link to="/profile/sign-in">Sign in</Link> or <Link to="/profile/confirm-registration">confirm
-        registration</Link>.
+        Already registered? <Link to="/profile/sign-in">Sign in</Link> or
+        <Link to="/profile/confirm-registration">confirm registration</Link>.
         <Input
           type='text'
           label='E-mail Address'

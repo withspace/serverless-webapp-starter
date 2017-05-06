@@ -13,10 +13,7 @@ class ProfileMenu extends Component {
   };
 
   signOut = () => {
-    CognitoService.signOut({
-      email: this.props.user.email,
-      onSuccess: this.props.auth.handleSignOut()
-    });
+    this.props.auth.signOut();
   };
 
   render() {

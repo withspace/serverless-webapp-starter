@@ -2,19 +2,19 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 import {Button} from "react-toolbox/lib/button";
 import {Input} from "react-toolbox/lib/input";
-import CognitoService from "./CognitoService";
 import {ErrorMessage, Loader} from "../common/messages"
-
-const emptyState = (user) => ({
-  email: user && user.email || '',
-  code: '',
-  error: null,
-  loading: false
-});
 
 class ConfirmRegistration extends React.Component {
 
-  state = emptyState(this.props.user);
+  emptyState = () => ({
+    email: this.props.user.email || '',
+    code: '',
+    error: null,
+    loading: false,
+    success:false
+  });
+
+  state = this.emptyState();
 
   handleChange = (name, value) => {
     this.setState({...this.state, [name]: value});
@@ -22,8 +22,8 @@ class ConfirmRegistration extends React.Component {
 
   confirmRegistration = () => {
 
-    const onSuccess = (user) => {
-      this.setState({...emptyState(user), success: true})
+    const onSuccess = () => {
+      this.setState({...this.emptyState(), success: true})
     };
 
     const onFailure = (error) => {
@@ -32,7 +32,7 @@ class ConfirmRegistration extends React.Component {
 
     this.setState({...this.state, loading: true});
 
-    CognitoService.confirmRegistration({
+    this.props.auth.confirmRegistration({
       email: this.state.email,
       code: this.state.code,
       onSuccess: onSuccess,
@@ -43,7 +43,6 @@ class ConfirmRegistration extends React.Component {
   requestCodeAgain = () => {
 
     const onSuccess = (user) => {
-      this.props.auth.updateUser(user);
       this.setState({...this.state, loading: false});
     };
 
@@ -53,7 +52,7 @@ class ConfirmRegistration extends React.Component {
 
     this.setState({...this.state, loading: true});
 
-    CognitoService.requestCodeAgain({
+    this.props.auth.requestCodeAgain({
       email: this.state.email,
       onSuccess: onSuccess,
       onFailure: onFailure

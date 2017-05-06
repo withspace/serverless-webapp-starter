@@ -1,95 +1,79 @@
 import {AuthenticationDetails, CognitoUserPool, CognitoUserAttribute, CognitoUser} from 'amazon-cognito-identity-js';
 import {cognitoConfig} from "../config";
-import User from "./User";
 
-const userPool = new CognitoUserPool({
-  UserPoolId: cognitoConfig.poolId,
-  ClientId: cognitoConfig.appClientId
-});
 
-const register = ({email, password, onSuccess, onFailure}) => {
+class CognitoService {
 
-  const emailAttr = new CognitoUserAttribute({
-    Name: 'email',
-    Value: email
+  userPool = new CognitoUserPool({
+    UserPoolId: cognitoConfig.poolId,
+    ClientId: cognitoConfig.appClientId
   });
 
-  userPool.signUp(email, password, [emailAttr], null, (error, response) => {
-    if (error) {
-      onFailure(error);
-    } else {
-      onSuccess(new User(email, false));
-    }
-  });
-};
+  cognitoUser(email) {
+    return new CognitoUser({Username: email, Pool: this.userPool});
+  }
 
-const confirmRegistration = ({email, code, onSuccess, onFailure}) => {
+  register({email, password, onSuccess, onFailure}) {
 
-  const cognitoUser = new CognitoUser({
-    Username: email,
-    Pool: userPool
-  });
+    const emailAttr = new CognitoUserAttribute({
+      Name: 'email',
+      Value: email
+    });
 
-  cognitoUser.confirmRegistration(code, true, (error, response) => {
-    if (error) {
-      onFailure(error);
-    } else {
-      onSuccess(new User(email, false));
-    }
-  });
-};
+    this.userPool.signUp(email, password, [emailAttr], null, (error, response) => {
+      if (error) {
+        onFailure(error);
+      } else {
+        onSuccess();
+      }
+    });
+  };
 
-const requestCodeAgain = ({email, onSuccess, onFailure}) => {
+  confirmRegistration({email, code, onSuccess, onFailure}) {
 
-  const cognitoUser = new CognitoUser({
-    Username: email,
-    Pool: userPool
-  });
+    const cognitoUser = this.cognitoUser(email);
 
-  cognitoUser.resendConfirmationCode((error, response) => {
-    if (error) {
-      onFailure(error);
-    } else {
-      onSuccess(new User(email, false))
-    }
-  });
-};
+    cognitoUser.confirmRegistration(code, true, (error, response) => {
+      if (error) {
+        onFailure(error);
+      } else {
+        onSuccess();
+      }
+    });
+  };
 
-const signIn = ({email, password, onSuccess, onFailure}) => {
+  requestCodeAgain = ({email, onSuccess, onFailure}) => {
 
-  const authenticationDetails = new AuthenticationDetails({
-    Username: email,
-    Password: password
-  });
+    const cognitoUser = this.cognitoUser(email);
 
-  const cognitoUser = new CognitoUser({
-    Username: email,
-    Pool: userPool
-  });
+    cognitoUser.resendConfirmationCode((error, response) => {
+      if (error) {
+        onFailure(error);
+      } else {
+        onSuccess()
+      }
+    });
+  };
 
-  cognitoUser.authenticateUser(authenticationDetails, {
-    onSuccess: (response) => onSuccess(new User(email, true)),
-    onFailure: (error) => onFailure(error)
-  });
-};
+  signIn = ({email, password, onSuccess, onFailure}) => {
 
-const signOut = ({email, onSuccess}) => {
+    const cognitoUser = this.cognitoUser(email);
 
-  const cognitoUser = new CognitoUser({
-    Username: email,
-    Pool: userPool
-  });
+    const authenticationDetails = new AuthenticationDetails({
+      Username: email,
+      Password: password
+    });
 
-  cognitoUser.signOut();
-  onSuccess();
-};
+    cognitoUser.authenticateUser(authenticationDetails, {
+      onSuccess: (response) => onSuccess(),
+      onFailure: (error) => onFailure(error)
+    });
+  };
 
-const CognitoService = {
-  register: register,
-  confirmRegistration: confirmRegistration,
-  requestCodeAgain: requestCodeAgain,
-  signIn: signIn,
-  signOut: signOut
-};
+  signOut = ({email, onSuccess}) => {
+    this.cognitoUser(email).signOut();
+    onSuccess();
+  };
+}
 
 export default CognitoService;
