@@ -1,17 +1,63 @@
 import React from "react";
+import {Redirect} from "react-router-dom";
 import {Button} from "react-toolbox/lib/button";
 import {Input} from "react-toolbox/lib/input";
+import CognitoService from "./CognitoService";
+import {ErrorMessage, Loader} from "../common/messages"
+
+const emptyState = () => ({
+  email: '',
+  code: '',
+  error: null,
+  loading: false
+});
 
 class ConfirmRegistration extends React.Component {
 
-  state = {email: '', code: ''};
+  state = emptyState();
 
   handleChange = (name, value) => {
     this.setState({...this.state, [name]: value});
   };
 
   confirmRegistration = () => {
-    console.log('Registration flow not implemented yet');
+
+    const onSuccess = (user) => {
+      this.setState({...emptyState(), success: true})
+    };
+
+    const onFailure = (error) => {
+      this.setState({...this.state, error: error, loading: false});
+    };
+
+    this.setState({...this.state, loading: true});
+
+    CognitoService.confirmRegistration({
+      email: this.state.email,
+      code: this.state.code,
+      onSuccess: onSuccess,
+      onFailure: onFailure
+    })
+  };
+
+  requestCodeAgain = () => {
+
+    const onSuccess = (user) => {
+      this.props.auth.updateUser(user);
+      this.setState({...this.state, loading: false});
+    };
+
+    const onFailure = (error) => {
+      this.setState({...this.state, error: error, loading: false});
+    };
+
+    this.setState({...this.state, loading: true});
+
+    CognitoService.requestCodeAgain({
+      email: this.state.email,
+      onSuccess: onSuccess,
+      onFailure: onFailure
+    });
   };
 
   render() {
@@ -32,7 +78,16 @@ class ConfirmRegistration extends React.Component {
           value={this.state.code}
           onChange={this.handleChange.bind(this, 'code')}
         />
-        <Button label='Confirm registration' onClick={this.confirmRegistration} raised primary/>
+        {this.state.error && <ErrorMessage text={this.state.error.message}/>}
+        {this.state.loading ?
+          <Loader text="Confirming registration code..."/> :
+          <div>
+            <Button label='Confirm registration' onClick={this.confirmRegistration} raised primary/>
+            &nbsp;
+            <Button label='Request code again' onClick={this.requestCodeAgain}/>
+          </div>
+        }
+        {this.state.success && <Redirect push={true} to="/profile/sign-in"/>}
       </div>
     );
   }

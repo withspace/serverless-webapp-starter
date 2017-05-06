@@ -4,7 +4,8 @@ import {ProgressBar} from "react-toolbox/lib/progress_bar";
 
 const styles = {
   error: {
-    color: 'indianred'
+    color: 'indianred',
+    margin: '1em 0'
   },
   loading: {
     color: 'gray'
@@ -24,15 +25,15 @@ const styles = {
 };
 
 export const ErrorMessage = ({text, ...rest}) => (
-  <p style={styles.error}>
+  <div style={styles.error}>
     <FontIcon style={styles.messageIcon}>error_outline</FontIcon>
     <div style={styles.messageText}>{text}</div>
-  </p>
+  </div>
 );
 
 export const Loader = ({text, ...rest}) => (
-  <p style={styles.loading}>
+  <div style={styles.loading}>
     <ProgressBar type="linear" mode="indeterminate" />
     <div>{text}</div>
-  </p>
+  </div>
 );

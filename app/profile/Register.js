@@ -15,10 +15,6 @@ const emptyState = () => ({
 
 class Register extends React.Component {
 
-  static contextTypes = {
-    router: React.PropTypes.object
-  };
-
   state = emptyState();
 
   handleChange = (name, value) => {
@@ -27,13 +23,12 @@ class Register extends React.Component {
 
   register = () => {
 
-    const registerSuccess = (user) => {
-      this.setState(emptyState());
+    const onSuccess = (user) => {
+      this.setState({...emptyState(), success: true});
       this.props.auth.updateUser(user);
-      this.context.router.history.push('/profile/confirm-registration');
     };
 
-    const registerFailure = (error) => {
+    const onFailure = (error) => {
       this.setState({...this.state, error: error, loading: false});
     };
 
@@ -42,8 +37,8 @@ class Register extends React.Component {
     CognitoService.register({
       email: this.state.email,
       password: this.state.password,
-      onSuccess: registerSuccess,
-      onFailure: registerFailure
+      onSuccess: onSuccess,
+      onFailure: onFailure
     });
   };
 
@@ -79,6 +74,7 @@ class Register extends React.Component {
           <Loader text="Registering user..."/> :
           <Button label='Register' onClick={this.register} raised primary/>
         }
+        {this.state.success && <Redirect push={true} to="/profile/confirm-registration"/>}
       </div>
     );
   }
