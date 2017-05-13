@@ -6,7 +6,7 @@ import {ErrorMessage, Loader} from "../common/messages"
 
 class Register extends React.Component {
 
-  emptyState = () => ({
+  static emptyState = () => ({
     email: '',
     password: '',
     passwordRepeated: '',
@@ -15,9 +15,9 @@ class Register extends React.Component {
     success: false
   });
 
-  state = this.emptyState();
+  state = Register.emptyState();
 
-  handleChange = (name, value) => {
+  handleChange = (name) => (value) => {
     this.setState({...this.state, [name]: value});
   };
 
@@ -28,7 +28,7 @@ class Register extends React.Component {
     };
 
     const onFailure = (error) => {
-      this.setState({...this.state, error: error, loading: false});
+      this.setState({...this.state, error, loading: false});
     };
 
     this.setState({...this.state, loading: true});
@@ -36,8 +36,8 @@ class Register extends React.Component {
     this.props.auth.register({
       email: this.state.email,
       password: this.state.password,
-      onSuccess: onSuccess,
-      onFailure: onFailure
+      onSuccess,
+      onFailure
     });
   };
 
@@ -45,28 +45,27 @@ class Register extends React.Component {
     return (
       <div>
         <h1>Register</h1>
-        Already registered? <Link to="/profile/sign-in">Sign in</Link> or
-        <Link to="/profile/confirm-registration">confirm registration</Link>.
+        Already registered? <Link to="/profile/sign-in">Sign in</Link> or <Link to="/profile/confirm-registration">confirm registration</Link>.
         <Input
           type='text'
           label='E-mail Address'
           name='email'
           value={this.state.email}
-          onChange={this.handleChange.bind(this, 'email')}
+          onChange={this.handleChange('email')}
         />
         <Input
           type='password'
           label='Password'
           name='password'
           value={this.state.password}
-          onChange={this.handleChange.bind(this, 'password')}
+          onChange={this.handleChange('password')}
         />
         <Input
           type='password'
           label='Repeat password'
           name='passwordRepeated'
           value={this.state.passwordRepeated}
-          onChange={this.handleChange.bind(this, 'passwordRepeated')}
+          onChange={this.handleChange('passwordRepeated')}
         />
         {this.state.error && <ErrorMessage text={this.state.error.message}/>}
         {this.state.loading

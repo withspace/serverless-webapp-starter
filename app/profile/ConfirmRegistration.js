@@ -27,7 +27,7 @@ class ConfirmRegistration extends React.Component {
     };
 
     const onFailure = (error) => {
-      this.setState({...this.state, error: error, loading: false});
+      this.setState({...this.state, error, loading: false});
     };
 
     this.setState({...this.state, loading: true});
@@ -35,8 +35,8 @@ class ConfirmRegistration extends React.Component {
     this.props.auth.confirmRegistration({
       email: this.state.email,
       code: this.state.code,
-      onSuccess: onSuccess,
-      onFailure: onFailure
+      onSuccess,
+      onFailure
     })
   };
 
@@ -47,15 +47,15 @@ class ConfirmRegistration extends React.Component {
     };
 
     const onFailure = (error) => {
-      this.setState({...this.state, error: error, loading: false});
+      this.setState({...this.state, error, loading: false});
     };
 
     this.setState({...this.state, loading: true});
 
     this.props.auth.requestCodeAgain({
       email: this.state.email,
-      onSuccess: onSuccess,
-      onFailure: onFailure
+      onSuccess,
+      onFailure
     });
   };
 

@@ -26,7 +26,7 @@ class SignIn extends React.Component {
     };
 
     const onFailure = (error) => {
-      this.setState({...this.state, error: error, loading: false});
+      this.setState({...this.state, error, loading: false});
     };
 
     this.setState({...this.state, password: '', loading: true});
@@ -34,8 +34,8 @@ class SignIn extends React.Component {
     this.props.auth.signIn({
       email: this.state.email,
       password: this.state.password,
-      onSuccess: onSuccess,
-      onFailure: onFailure
+      onSuccess,
+      onFailure
     });
   };
 

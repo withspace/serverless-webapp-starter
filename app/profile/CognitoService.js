@@ -1,7 +1,6 @@
 import {AuthenticationDetails, CognitoUserPool, CognitoUserAttribute, CognitoUser} from 'amazon-cognito-identity-js';
 import {cognitoConfig} from "../config";
 
-
 class CognitoService {
 
   userPool = new CognitoUserPool({
@@ -42,7 +41,7 @@ class CognitoService {
     });
   };
 
-  requestCodeAgain = ({email, onSuccess, onFailure}) => {
+  requestCodeAgain({email, onSuccess, onFailure}) {
 
     const cognitoUser = this.cognitoUser(email);
 
@@ -55,7 +54,7 @@ class CognitoService {
     });
   };
 
-  signIn = ({email, password, onSuccess, onFailure}) => {
+  signIn({email, password, onSuccess, onFailure}) {
 
     const cognitoUser = this.cognitoUser(email);
 
@@ -70,7 +69,7 @@ class CognitoService {
     });
   };
 
-  signOut = ({email, onSuccess}) => {
+  signOut({email, onSuccess}) {
     this.cognitoUser(email).signOut();
     onSuccess();
   };
