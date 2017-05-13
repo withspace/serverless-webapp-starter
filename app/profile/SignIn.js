@@ -5,7 +5,7 @@ import {ErrorMessage, Loader} from "../common/messages"
 
 class SignIn extends React.Component {
 
-  emptyState = () => ({
+  static emptyState = () => ({
     email: this.props.user.email || '',
     password: '',
     error: null,
@@ -13,9 +13,9 @@ class SignIn extends React.Component {
     success: false
   });
 
-  state = this.emptyState();
+  state = SignIn.emptyState();
 
-  handleChange = (name, value) => {
+  handleChange = (name) => (value) => {
     this.setState({...this.state, [name]: value});
   };
 
@@ -48,14 +48,14 @@ class SignIn extends React.Component {
           label='E-mail Address'
           name='email'
           value={this.state.email}
-          onChange={this.handleChange.bind(this, 'email')}
+          onChange={this.handleChange('email')}
         />
         <Input
           type='password'
           label='Password'
           name='password'
           value={this.state.password}
-          onChange={this.handleChange.bind(this, 'password')}
+          onChange={this.handleChange('password')}
         />
         {this.state.error && <ErrorMessage text={this.state.error.message}/>}
         {this.state.loading ?

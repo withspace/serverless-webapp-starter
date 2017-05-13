@@ -6,7 +6,7 @@ import {ErrorMessage, Loader} from "../common/messages"
 
 class ConfirmRegistration extends React.Component {
 
-  emptyState = () => ({
+  static emptyState = () => ({
     email: this.props.user.email || '',
     code: '',
     error: null,
@@ -14,7 +14,7 @@ class ConfirmRegistration extends React.Component {
     success:false
   });
 
-  state = this.emptyState();
+  state = ConfirmRegistration.emptyState();
 
   handleChange = (name, value) => {
     this.setState({...this.state, [name]: value});
@@ -23,7 +23,7 @@ class ConfirmRegistration extends React.Component {
   confirmRegistration = () => {
 
     const onSuccess = () => {
-      this.setState({...this.emptyState(), success: true})
+      this.setState({...ConfirmRegistration.emptyState(), success: true})
     };
 
     const onFailure = (error) => {
