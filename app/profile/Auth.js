@@ -3,11 +3,10 @@ import CognitoService from "./CognitoService";
 
 class Auth {
 
-  constructor(updateUser) {
+  constructor({updateUser}) {
 
     this.updateUser = (user) => {
       console.log('Update user', user);
-      this.user = user;
       updateUser(user);
     };
 
@@ -54,8 +53,8 @@ class Auth {
     this.cognitoService.signIn({email, password, ...{onSuccess: signInSuccess}, onFailure});
   }
 
-  signOut() {
-    this.cognitoService.signOut({email: this.user.email, onSuccess: () => this.updateUser(User.signedOut(null))});
+  signOut({email}) {
+    this.cognitoService.signOut({email: email, onSuccess: () => this.updateUser(User.signedOut(email))});
   }
 }
 

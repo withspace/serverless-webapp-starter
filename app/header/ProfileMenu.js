@@ -13,7 +13,8 @@ class ProfileMenu extends Component {
   };
 
   signOut = () => {
-    this.props.auth.signOut();
+    const {auth, user} = this.props;
+    auth.signOut({email: user.email});
   };
 
   render() {

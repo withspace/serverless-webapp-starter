@@ -24,7 +24,7 @@ const SignInButtons = ({auth}) => (
 const Header = ({auth, user}) => (
   <AppBar title="Serverless WebApp Starter" leftIcon="menu">
     <Navigation type="horizontal">
-      {user.signedIn ? <ProfileMenu auth={auth}/> : <SignInButtons auth={auth}/>}
+      {user.signedIn ? <ProfileMenu auth={auth} user={user}/> : <SignInButtons auth={auth}/>}
     </Navigation>
   </AppBar>
 );

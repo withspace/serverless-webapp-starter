@@ -8,12 +8,12 @@ import Auth from "./profile/Auth";
 
 class App extends Component {
 
-  auth = new Auth(user => {
-    this.setState({...this.state, user});
+  auth = new Auth({
+    updateUser: user => this.setState({...this.state, user})
   });
 
   state = {
-    user: new User(null, false)
+    user: User.signedOut(null)
   };
 
   render() {
