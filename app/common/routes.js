@@ -14,7 +14,7 @@ export const PublicRoute = ({component: Component, user, ...rest}) => (
   <Route
     {...rest}
     render={(props) => user.signedIn === false
-      ? <Component {...mergedProps(rest, props)} />
+      ? <Component {...mergedProps({user}, rest, props)} />
       : <Redirect to={{pathname: '/', state: {from: props.location}}}/>}
   />
 );
@@ -23,7 +23,7 @@ export const PrivateRoute = ({component: Component, user, ...rest}) => (
   <Route
     {...rest}
     render={(props) => user.signedIn === true
-      ? <Component {...mergedProps(rest, user, props)} />
+      ? <Component {...mergedProps({user}, rest, props)} />
       : <Redirect to={{pathname: '/', state: {from: props.location}}}/>}
   />
 );

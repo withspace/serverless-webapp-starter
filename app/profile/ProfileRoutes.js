@@ -8,8 +8,8 @@ import ConfirmRegistration from "./ConfirmRegistration";
 const ProfileRoutes = ({user, auth, ...rest}) => (
   <div>
     <PublicRoute path="/profile/sign-in" component={SignIn} user={user} auth={auth}/>
-    <PublicRoute path="/profile/register" component={Register} user={user} auth="{auth}"/>
-    <PublicRoute path="/profile/confirm-registration" component={ConfirmRegistration} user={user}/>
+    <PublicRoute path="/profile/register" component={Register} user={user} auth={auth}/>
+    <PublicRoute path="/profile/confirm-registration" component={ConfirmRegistration} user={user} auth={auth}/>
     <PrivateRoute path="/profile/home" component={Profile} user={user}/>
   </div>
 );

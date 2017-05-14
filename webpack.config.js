@@ -5,6 +5,17 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body'
 });
 
+const webpack = require('webpack');
+
+const noEnvVar = name => {
+  throw `${name} environment variable is undefined. Please provide it to fix this error.`;
+};
+
+const DefinePluginConfig = new webpack.DefinePlugin({
+  COGNITO_POOL_ID: JSON.stringify(process.env.COGNITO_POOL_ID || noEnvVar('COGNITO_POOL_ID')),
+  COGNITO_APP_CLIENT_ID: JSON.stringify(process.env.COGNITO_APP_CLIENT_ID || noEnvVar('COGNITO_APP_CLIENT_ID'))
+});
+
 const BabelLoader = {
   test: /\.js$/,
   exclude: /node_modules/,
@@ -16,6 +27,11 @@ const CSSLoader = {
   loader: "style-loader!css-loader?modules!postcss-loader"
 };
 
+const JSONLoader = {
+  test: /\.json$/,
+  loader: 'json-loader'
+};
+
 module.exports = {
   entry: [
     './app/index.js'
@@ -25,7 +41,7 @@ module.exports = {
     filename: "index_bundle.js"
   },
   module: {
-    loaders: [BabelLoader, CSSLoader]
+    loaders: [BabelLoader, CSSLoader, JSONLoader]
   },
-  plugins: [HtmlWebpackPluginConfig]
+  plugins: [HtmlWebpackPluginConfig, DefinePluginConfig]
 };
