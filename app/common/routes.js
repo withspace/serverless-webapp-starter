@@ -1,29 +1,29 @@
-import React from "react";
-import {Route, Redirect} from "react-router-dom";
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
 const mergedProps = (...props) => Object.assign({}, ...props);
 
-export const DefaultRoute = ({component: Component, ...rest}) => (
+export const DefaultRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={(props) => <Component {...mergedProps(rest, props)} />}
+    render={props => <Component {...mergedProps(rest, props)} />}
   />
 );
 
-export const PublicRoute = ({component: Component, user, ...rest}) => (
+export const PublicRoute = ({ component: Component, user, ...rest }) => (
   <Route
     {...rest}
-    render={(props) => user.signedIn === false
-      ? <Component {...mergedProps({user}, rest, props)} />
-      : <Redirect to={{pathname: '/', state: {from: props.location}}}/>}
+    render={props => user.signedIn === false
+      ? <Component {...mergedProps({ user }, rest, props)} />
+      : <Redirect to={{ pathname: '/', state: { from: props.location } }} />}
   />
 );
 
-export const PrivateRoute = ({component: Component, user, ...rest}) => (
+export const PrivateRoute = ({ component: Component, user, ...rest }) => (
   <Route
     {...rest}
-    render={(props) => user.signedIn === true
-      ? <Component {...mergedProps({user}, rest, props)} />
-      : <Redirect to={{pathname: '/', state: {from: props.location}}}/>}
+    render={props => user.signedIn === true
+      ? <Component {...mergedProps({ user }, rest, props)} />
+      : <Redirect to={{ pathname: '/', state: { from: props.location } }} />}
   />
 );
