@@ -9,7 +9,7 @@ class Auth {
       updateUser(user);
     };
 
-    this.cognitoService = new CognitoService();
+    this.cognito = new CognitoService();
   }
 
   register({ email, password, onSuccess, onFailure }) {
@@ -18,7 +18,7 @@ class Auth {
       onSuccess();
     };
 
-    this.cognitoService.register({ email, password, ...{ onSuccess: registerSuccess }, onFailure });
+    this.cognito.register({ email, password, ...{ onSuccess: registerSuccess }, onFailure });
   }
 
   confirmRegistration({ email, code, onSuccess, onFailure }) {
@@ -27,7 +27,7 @@ class Auth {
       onSuccess();
     };
 
-    this.cognitoService.confirmRegistration({ email, code, ...{ onSuccess: confirmSuccess }, onFailure });
+    this.cognito.confirmRegistration({ email, code, ...{ onSuccess: confirmSuccess }, onFailure });
   }
 
   requestCodeAgain({ email, onSuccess, onFailure }) {
@@ -36,7 +36,7 @@ class Auth {
       onSuccess();
     };
 
-    this.cognitoService.requestCodeAgain({ email, ...{ onSuccess: requestSuccess }, onFailure });
+    this.cognito.requestCodeAgain({ email, ...{ onSuccess: requestSuccess }, onFailure });
   }
 
   signIn({ email, password, onSuccess, onFailure }) {
@@ -45,11 +45,11 @@ class Auth {
       onSuccess();
     };
 
-    this.cognitoService.signIn({ email, password, ...{ onSuccess: signInSuccess }, onFailure });
+    this.cognito.signIn({ email, password, ...{ onSuccess: signInSuccess }, onFailure });
   }
 
   signOut({ email }) {
-    this.cognitoService.signOut({ email, onSuccess: () => this.updateUser(User.signedOut(email)) });
+    this.cognito.signOut({ email, onSuccess: () => this.updateUser(User.signedOut(email)) });
   }
 }
 

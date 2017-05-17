@@ -1,5 +1,5 @@
 import { AuthenticationDetails, CognitoUserPool, CognitoUserAttribute, CognitoUser } from 'amazon-cognito-identity-js';
-import { cognitoConfig } from '../config';
+import cognitoConfig from '../config';
 
 class CognitoService {
 
@@ -18,7 +18,7 @@ class CognitoService {
       Value: email,
     });
 
-    this.userPool.signUp(email, password, [emailAttr], null, (error, response) => {
+    this.userPool.signUp(email, password, [emailAttr], null, (error) => {
       if (error) {
         onFailure(error);
       } else {
@@ -30,7 +30,7 @@ class CognitoService {
   confirmRegistration({ email, code, onSuccess, onFailure }) {
     const cognitoUser = this.cognitoUser(email);
 
-    cognitoUser.confirmRegistration(code, true, (error, response) => {
+    cognitoUser.confirmRegistration(code, true, (error) => {
       if (error) {
         onFailure(error);
       } else {
@@ -42,7 +42,7 @@ class CognitoService {
   requestCodeAgain({ email, onSuccess, onFailure }) {
     const cognitoUser = this.cognitoUser(email);
 
-    cognitoUser.resendConfirmationCode((error, response) => {
+    cognitoUser.resendConfirmationCode((error) => {
       if (error) {
         onFailure(error);
       } else {
@@ -60,7 +60,7 @@ class CognitoService {
     });
 
     cognitoUser.authenticateUser(authenticationDetails, {
-      onSuccess: response => onSuccess(),
+      onSuccess: () => onSuccess(),
       onFailure: error => onFailure(error),
     });
   }
