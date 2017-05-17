@@ -5,7 +5,7 @@ import { ErrorMessage, Loader } from '../common/messages';
 
 class SignIn extends React.Component {
 
-  static emptyState = () => ({
+  emptyState = () => ({
     email: this.props.user.email || '',
     password: '',
     error: null,
@@ -13,7 +13,7 @@ class SignIn extends React.Component {
     success: false,
   });
 
-  state = SignIn.emptyState();
+  state = this.emptyState();
 
   handleChange = name => (value) => {
     this.setState({ ...this.state, [name]: value });

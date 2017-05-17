@@ -18,7 +18,7 @@ const DefinePluginConfig = new webpack.DefinePlugin({
 });
 
 const BabelLoader = {
-  test: /\.js$/,
+  test: /\.(js|jsx)$/,
   exclude: /node_modules/,
   loader: 'babel-loader',
 };
@@ -35,11 +35,14 @@ const JSONLoader = {
 
 module.exports = {
   entry: [
-    './app/index.js',
+    './app/index.jsx',
   ],
   output: {
     path: `${__dirname}/dist`,
     filename: 'index_bundle.js',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   module: {
     loaders: [BabelLoader, CSSLoader, JSONLoader],
