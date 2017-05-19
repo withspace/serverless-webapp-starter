@@ -1,27 +1,29 @@
-import React from 'react';
-import { Input } from 'react-toolbox/lib/input';
+import React, { PropTypes } from 'react';
 import { Button } from 'react-toolbox/lib/button';
+import { Input } from 'react-toolbox/lib/input';
 import { ErrorMessage, Loader } from '../common/messages';
+import Auth from './Auth';
+import User from './User';
 
 class SignIn extends React.Component {
 
-  emptyState = () => ({
-    email: this.props.user.email || '',
-    password: '',
-    error: null,
-    loading: false,
-    success: false,
-  });
+  getInitialState() {
+    return {
+      email: this.props.user.email || '',
+      password: '',
+      error: null,
+      loading: false,
+      success: false,
+    };
+  }
 
-  state = this.emptyState();
+  handleChange(name) {
+    return value => this.setState({ ...this.state, [name]: value });
+  }
 
-  handleChange = name => (value) => {
-    this.setState({ ...this.state, [name]: value });
-  };
-
-  signIn = () => {
+  signIn() {
     const onSuccess = () => {
-      // nothing
+      this.setState(this.getInitialState());
     };
 
     const onFailure = (error) => {
@@ -36,7 +38,7 @@ class SignIn extends React.Component {
       onSuccess,
       onFailure,
     });
-  };
+  }
 
   render() {
     return (
@@ -59,11 +61,16 @@ class SignIn extends React.Component {
         {this.state.error && <ErrorMessage text={this.state.error.message} />}
         {this.state.loading ?
           <Loader text="Signing in..." /> :
-          <Button label="Sign in" onClick={this.signIn} raised primary />
+          <Button label="Sign in" onClick={() => this.signIn()} raised primary />
         }
       </div>
     );
   }
 }
+
+SignIn.propTypes = {
+  auth: PropTypes.instanceOf(Auth).isRequired,
+  user: PropTypes.instanceOf(User).isRequired,
+};
 
 export default SignIn;

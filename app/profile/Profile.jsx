@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import User from './User';
 
-const Profile = ({ user, ...rest }) => (
-  <div>
-    <h1>Profile</h1>
-    You are signed in as <strong>{user.email}</strong>.
-  </div>
-);
+function Profile({ user }) {
+  return (
+    <div>
+      <h1>Profile</h1>
+      You are signed in as <strong>{user.email}</strong>.
+    </div>
+  );
+}
+
+Profile.propTypes = {
+  user: PropTypes.instanceOf(User).isRequired,
+};
 
 export default Profile;

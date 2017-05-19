@@ -1,28 +1,30 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Button } from 'react-toolbox/lib/button';
 import { Input } from 'react-toolbox/lib/input';
 import { ErrorMessage, Loader } from '../common/messages';
+import Auth from './Auth';
+import User from './User';
 
 class ConfirmRegistration extends React.Component {
 
-  static emptyState = () => ({
-    email: this.props.user.email || '',
-    code: '',
-    error: null,
-    loading: false,
-    success: false,
-  });
+  getInitialState() {
+    return {
+      email: this.props.user.email || '',
+      code: '',
+      error: null,
+      loading: false,
+      success: false,
+    };
+  }
 
-  state = ConfirmRegistration.emptyState();
+  handleChange(name) {
+    return value => this.setState({ ...this.state, [name]: value });
+  }
 
-  handleChange = (name, value) => {
-    this.setState({ ...this.state, [name]: value });
-  };
-
-  confirmRegistration = () => {
+  confirmRegistration() {
     const onSuccess = () => {
-      this.setState({ ...ConfirmRegistration.emptyState(), success: true });
+      this.setState({ ...this.getInitialState(), success: true });
     };
 
     const onFailure = (error) => {
@@ -37,11 +39,11 @@ class ConfirmRegistration extends React.Component {
       onSuccess,
       onFailure,
     });
-  };
+  }
 
-  requestCodeAgain = () => {
-    const onSuccess = (user) => {
-      this.setState({ ...this.state, loading: false });
+  requestCodeAgain() {
+    const onSuccess = () => {
+      this.setState({ ...this.state, code: '', loading: false });
     };
 
     const onFailure = (error) => {
@@ -55,7 +57,7 @@ class ConfirmRegistration extends React.Component {
       onSuccess,
       onFailure,
     });
-  };
+  }
 
   render() {
     return (
@@ -66,14 +68,14 @@ class ConfirmRegistration extends React.Component {
           label="E-mail Address"
           name="email"
           value={this.state.email}
-          onChange={this.handleChange.bind(this, 'email')}
+          onChange={this.handleChange('email')}
         />
         <Input
           type="text"
           label="Confirmation code"
           name="code"
           value={this.state.code}
-          onChange={this.handleChange.bind(this, 'code')}
+          onChange={this.handleChange('code')}
         />
         {this.state.error && <ErrorMessage text={this.state.error.message} />}
         {this.state.loading
@@ -89,5 +91,11 @@ class ConfirmRegistration extends React.Component {
     );
   }
 }
+
+
+ConfirmRegistration.propTypes = {
+  auth: PropTypes.instanceOf(Auth).isRequired,
+  user: PropTypes.instanceOf(User).isRequired,
+};
 
 export default ConfirmRegistration;

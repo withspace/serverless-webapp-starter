@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FontIcon } from 'react-toolbox/lib/font_icon';
 import { ProgressBar } from 'react-toolbox/lib/progress_bar';
 
@@ -24,16 +24,28 @@ const styles = {
   },
 };
 
-export const ErrorMessage = ({ text, ...rest }) => (
-  <div style={styles.error}>
-    <FontIcon style={styles.messageIcon}>error_outline</FontIcon>
-    <div style={styles.messageText}>{text}</div>
-  </div>
-);
+export function ErrorMessage({ text }) {
+  return (
+    <div style={styles.error}>
+      <FontIcon style={styles.messageIcon}>error_outline</FontIcon>
+      <div style={styles.messageText}>{text}</div>
+    </div>
+  );
+}
 
-export const Loader = ({ text, ...rest }) => (
-  <div style={styles.loading}>
-    <ProgressBar type="linear" mode="indeterminate" />
-    <div>{text}</div>
-  </div>
-);
+ErrorMessage.propTypes = {
+  text: PropTypes.string.isRequired,
+};
+
+export function Loader({ text }) {
+  return (
+    <div style={styles.loading}>
+      <ProgressBar type="linear" mode="indeterminate" />
+      <div>{text}</div>
+    </div>
+  );
+}
+
+Loader.propTypes = {
+  text: PropTypes.string.isRequired,
+};

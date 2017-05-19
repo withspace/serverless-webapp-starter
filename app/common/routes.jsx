@@ -1,29 +1,37 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import User from '../profile/User';
 
 const mergedProps = (...props) => Object.assign({}, ...props);
 
-export const DefaultRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => <Component {...mergedProps(rest, props)} />}
-  />
-);
+export function DefaultRoute({ component: Component, ...rest }) {
+  return <Route {...rest} render={props => <Component {...mergedProps(rest, props)} />} />;
+}
 
-export const PublicRoute = ({ component: Component, user, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => user.signedIn === false
-      ? <Component {...mergedProps({ user }, rest, props)} />
-      : <Redirect to={{ pathname: '/', state: { from: props.location } }} />}
-  />
-);
+DefaultRoute.propTypes = {
+  component: PropTypes.func.isRequired,
+};
 
-export const PrivateRoute = ({ component: Component, user, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => user.signedIn === true
-      ? <Component {...mergedProps({ user }, rest, props)} />
-      : <Redirect to={{ pathname: '/', state: { from: props.location } }} />}
-  />
-);
+export function PublicRoute({ component: Component, user, ...rest }) {
+  function RedirectSigned(props) {
+    return user.signedIn ? <Redirect to="/" /> : <Component {...mergedProps({ user }, rest, props)} />;
+  }
+  return <Route {...rest} render={RedirectSigned} />;
+}
+
+PublicRoute.propTypes = {
+  component: PropTypes.func.isRequired,
+  user: PropTypes.instanceOf(User).isRequired,
+};
+
+export function PrivateRoute({ component: Component, user, ...rest }) {
+  function RedirectUnsigned(props) {
+    return user.signedIn ? <Component {...mergedProps({ user }, rest, props)} /> : <Redirect to="/" />;
+  }
+  return <Route {...rest} render={RedirectUnsigned} />;
+}
+
+PrivateRoute.propTypes = {
+  component: PropTypes.func.isRequired,
+  user: PropTypes.instanceOf(User).isRequired,
+};

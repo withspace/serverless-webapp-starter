@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Routes from './Routes';
-import Header from './header/Header';
 import { Layout } from 'react-toolbox/lib/layout';
-import User from './profile/User';
+import Header from './header/Header';
 import Auth from './profile/Auth';
+import User from './profile/User';
+import Routes from './Routes';
 
 class App extends Component {
-
-  auth = new Auth({
-    updateUser: user => this.setState({ ...this.state, user }),
-  });
 
   state = {
     user: User.signedOut(null),
   };
+
+  auth = new Auth({
+    updateUser: user => this.setState({ ...this.state, user }),
+  });
 
   render() {
     return (

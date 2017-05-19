@@ -1,29 +1,30 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Button } from 'react-toolbox/lib/button';
 import { Input } from 'react-toolbox/lib/input';
 import { ErrorMessage, Loader } from '../common/messages';
+import Auth from './Auth';
 
 class Register extends React.Component {
 
-  static emptyState = () => ({
-    email: '',
-    password: '',
-    passwordRepeated: '',
-    error: null,
-    loading: false,
-    success: false,
-  });
+  getInitialState() {
+    return {
+      email: '',
+      password: '',
+      passwordRepeated: '',
+      error: null,
+      loading: false,
+      success: false,
+    };
+  }
 
-  state = Register.emptyState();
+  handleChange(name) {
+    return value => this.setState({ ...this.state, [name]: value });
+  }
 
-  handleChange = name => (value) => {
-    this.setState({ ...this.state, [name]: value });
-  };
-
-  register = () => {
+  register() {
     const onSuccess = () => {
-      this.setState({ ...this.emptyState(), success: true });
+      this.setState({ ...this.getInitialState(), success: true });
     };
 
     const onFailure = (error) => {
@@ -38,13 +39,14 @@ class Register extends React.Component {
       onSuccess,
       onFailure,
     });
-  };
+  }
 
   render() {
     return (
       <div>
         <h1>Register</h1>
-        Already registered? <Link to="/profile/sign-in">Sign in</Link> or <Link to="/profile/confirm-registration">confirm registration</Link>.
+        Already registered? <Link to="/profile/sign-in">Sign in</Link> or <Link to="/profile/confirm-registration">confirm
+        registration</Link>.
         <Input
           type="text"
           label="E-mail Address"
@@ -69,12 +71,16 @@ class Register extends React.Component {
         {this.state.error && <ErrorMessage text={this.state.error.message} />}
         {this.state.loading
           ? <Loader text="Registering user..." />
-          : <Button label="Register" onClick={this.register} raised primary />
+          : <Button label="Register" onClick={() => this.register()} raised primary />
         }
         {this.state.success && <Redirect push to="/profile/confirm-registration" />}
       </div>
     );
   }
 }
+
+Register.propTypes = {
+  auth: PropTypes.instanceOf(Auth).isRequired,
+};
 
 export default Register;
