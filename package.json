@@ -6,7 +6,8 @@
     "lint": "eslint . --ext .js --ext .jsx --fix",
     "start": "COGNITO_POOL_ID='eu-central-1_tVle9U0Pj' COGNITO_APP_CLIENT_ID='es5skki6qdv5i574n4cqbsc8e' webpack-dev-server --content-base app --port 9090 --inline --hot",
     "build": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "reset-deps": "rm -rf ./node_modules/* && rm -f ./npm-shrinkwrap.json && npm install && npm shrinkwrap -u"
   },
   "repository": {
     "type": "git",

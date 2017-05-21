@@ -4,7 +4,7 @@
   "dependencies": {
     "amazon-cognito-identity-js": {
       "version": "1.18.0",
-      "from": "amazon-cognito-identity-js@>=1.17.0 <2.0.0",
+      "from": "amazon-cognito-identity-js@>=1.18.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/amazon-cognito-identity-js/-/amazon-cognito-identity-js-1.18.0.tgz"
     },
     "asap": {
