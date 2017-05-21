@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "dependencies": {
     "amazon-cognito-identity-js": {
-      "version": "1.17.0",
-      "from": "amazon-cognito-identity-js@>=1.17.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/amazon-cognito-identity-js/-/amazon-cognito-identity-js-1.17.0.tgz"
+      "version": "1.18.0",
+      "from": "amazon-cognito-identity-js@>=1.18.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/amazon-cognito-identity-js/-/amazon-cognito-identity-js-1.18.0.tgz"
     },
     "asap": {
       "version": "2.0.5",
@@ -13,9 +13,9 @@
       "resolved": "https://registry.npmjs.org/asap/-/asap-2.0.5.tgz"
     },
     "aws-sdk": {
-      "version": "2.50.0",
+      "version": "2.54.0",
       "from": "aws-sdk@>=2.6.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.50.0.tgz"
+      "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.54.0.tgz"
     },
     "base64-js": {
       "version": "1.2.0",
