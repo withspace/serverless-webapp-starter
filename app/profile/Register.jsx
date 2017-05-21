@@ -5,9 +5,11 @@ import { Input } from 'react-toolbox/lib/input';
 import { ErrorMessage, Loader } from '../common/messages';
 import Auth from './Auth';
 
-class Register extends React.Component {
+export default class Register extends React.Component {
 
-  static initialState() {
+  state = this.initialState();
+
+  initialState() {
     return {
       email: '',
       password: '',
@@ -18,15 +20,11 @@ class Register extends React.Component {
     };
   }
 
-  state = Register.initialState()
-
-  handleChange = (name) => {
-    return (value) => this.setState({ ...this.state, [name]: value });
-  }
+  handleChange = name => value => this.setState({ ...this.state, [name]: value });
 
   handleRegistration = () => {
     const onSuccess = () => {
-      this.setState({ ...Register.initialState(), success: true });
+      this.setState({ ...this.initialState(), success: true });
     };
 
     const onFailure = (error) => {
@@ -41,7 +39,7 @@ class Register extends React.Component {
       onSuccess,
       onFailure,
     });
-  }
+  };
 
   render() {
     return (
@@ -84,5 +82,3 @@ class Register extends React.Component {
 Register.propTypes = {
   auth: PropTypes.instanceOf(Auth).isRequired,
 };
-
-export default Register;

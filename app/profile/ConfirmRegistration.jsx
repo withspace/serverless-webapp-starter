@@ -6,7 +6,9 @@ import { ErrorMessage, Loader } from '../common/messages';
 import Auth from './Auth';
 import User from './User';
 
-class ConfirmRegistration extends React.Component {
+export default class ConfirmRegistration extends React.Component {
+
+  state = this.initialState();
 
   initialState() {
     return {
@@ -18,11 +20,7 @@ class ConfirmRegistration extends React.Component {
     };
   }
 
-  state = this.initialState()
-
-  handleChange = (name) =>{
-    return (value) => this.setState({ ...this.state, [name]: value });
-  }
+  handleChange = name => value => this.setState({ ...this.state, [name]: value });
 
   handleRegistrationConfirmation = () => {
     const onSuccess = () => {
@@ -41,7 +39,7 @@ class ConfirmRegistration extends React.Component {
       onSuccess,
       onFailure,
     });
-  }
+  };
 
   handleRequestingCodeAgain = () => {
     const onSuccess = () => {
@@ -59,7 +57,7 @@ class ConfirmRegistration extends React.Component {
       onSuccess,
       onFailure,
     });
-  }
+  };
 
   render() {
     return (
@@ -85,7 +83,7 @@ class ConfirmRegistration extends React.Component {
           : <div>
             <Button label="Confirm registration" onClick={this.handleRegistrationConfirmation} raised primary />
             &nbsp;
-            <Button label="Request code again" onClick={ this.handleRequestingCodeAgain} />
+            <Button label="Request code again" onClick={this.handleRequestingCodeAgain} />
           </div>
         }
         {this.state.success && <Redirect push to="/profile/sign-in" />}
@@ -99,5 +97,3 @@ ConfirmRegistration.propTypes = {
   auth: PropTypes.instanceOf(Auth).isRequired,
   user: PropTypes.instanceOf(User).isRequired,
 };
-
-export default ConfirmRegistration;

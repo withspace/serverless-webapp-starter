@@ -1,7 +1,7 @@
 import User from './User';
 import CognitoService from './CognitoService';
 
-class Auth {
+export default class Auth {
 
   constructor({ updateUser }) {
     this.updateUser = (user) => {
@@ -52,5 +52,3 @@ class Auth {
     this.cognito.signOut({ email, onSuccess: () => this.updateUser(User.signedOut(email)) });
   }
 }
-
-export default Auth;

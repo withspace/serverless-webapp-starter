@@ -6,8 +6,8 @@ import Auth from '../profile/Auth';
 import User from '../profile/User';
 import ProfileMenu from './ProfileMenu';
 
-const styles = {
-  title: {
+export const headerStyles = {
+  link: {
     cursor: 'pointer',
     textDecoration: 'none',
     color: 'inherit',
@@ -19,8 +19,8 @@ const styles = {
 function SignInButtons() {
   return (
     <div>
-      <Link style={styles.title} to="/profile/register">Register</Link>
-      <Link style={styles.title} to="/profile/sign-in">Sign In</Link>
+      <Link style={headerStyles.link} to="/profile/register">Register</Link>
+      <Link style={headerStyles.link} to="/profile/sign-in">Sign In</Link>
     </div>
   );
 }

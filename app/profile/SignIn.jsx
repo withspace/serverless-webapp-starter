@@ -5,9 +5,11 @@ import { ErrorMessage, Loader } from '../common/messages';
 import Auth from './Auth';
 import User from './User';
 
-class SignIn extends React.Component {
+export default class SignIn extends React.Component {
 
-  getInitialState() {
+  state = this.initialState();
+
+  initialState() {
     return {
       email: this.props.user.email || '',
       password: '',
@@ -17,13 +19,11 @@ class SignIn extends React.Component {
     };
   }
 
-  handleChange(name) {
-    return value => this.setState({ ...this.state, [name]: value });
-  }
+  handleChange = name => value => this.setState({ ...this.state, [name]: value });
 
-  signIn() {
+  handleSignIn = () => {
     const onSuccess = () => {
-      this.setState(this.getInitialState());
+      // nothing
     };
 
     const onFailure = (error) => {
@@ -38,7 +38,7 @@ class SignIn extends React.Component {
       onSuccess,
       onFailure,
     });
-  }
+  };
 
   render() {
     return (
@@ -61,7 +61,7 @@ class SignIn extends React.Component {
         {this.state.error && <ErrorMessage text={this.state.error.message} />}
         {this.state.loading ?
           <Loader text="Signing in..." /> :
-          <Button label="Sign in" onClick={() => this.signIn()} raised primary />
+          <Button label="Sign in" onClick={this.handleSignIn} raised primary />
         }
       </div>
     );
@@ -72,5 +72,3 @@ SignIn.propTypes = {
   auth: PropTypes.instanceOf(Auth).isRequired,
   user: PropTypes.instanceOf(User).isRequired,
 };
-
-export default SignIn;

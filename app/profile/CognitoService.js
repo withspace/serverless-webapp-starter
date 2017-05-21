@@ -1,7 +1,7 @@
 import { AuthenticationDetails, CognitoUserPool, CognitoUserAttribute, CognitoUser } from 'amazon-cognito-identity-js';
 import cognitoConfig from '../config';
 
-class CognitoService {
+export default class CognitoService {
 
   userPool = new CognitoUserPool({
     UserPoolId: cognitoConfig.poolId,
@@ -70,5 +70,3 @@ class CognitoService {
     onSuccess();
   }
 }
-
-export default CognitoService;
