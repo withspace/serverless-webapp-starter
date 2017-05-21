@@ -7,7 +7,7 @@ import Auth from './Auth';
 
 class Register extends React.Component {
 
-  getInitialState() {
+  static initialState() {
     return {
       email: '',
       password: '',
@@ -18,13 +18,15 @@ class Register extends React.Component {
     };
   }
 
-  handleChange(name) {
-    return value => this.setState({ ...this.state, [name]: value });
+  state = Register.initialState()
+
+  handleChange = (name) => {
+    return (value) => this.setState({ ...this.state, [name]: value });
   }
 
-  register() {
+  handleRegistration = () => {
     const onSuccess = () => {
-      this.setState({ ...this.getInitialState(), success: true });
+      this.setState({ ...Register.initialState(), success: true });
     };
 
     const onFailure = (error) => {
@@ -71,7 +73,7 @@ class Register extends React.Component {
         {this.state.error && <ErrorMessage text={this.state.error.message} />}
         {this.state.loading
           ? <Loader text="Registering user..." />
-          : <Button label="Register" onClick={() => this.register()} raised primary />
+          : <Button label="Register" onClick={this.handleRegistration} raised primary />
         }
         {this.state.success && <Redirect push to="/profile/confirm-registration" />}
       </div>

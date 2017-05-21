@@ -8,7 +8,7 @@ import User from './User';
 
 class ConfirmRegistration extends React.Component {
 
-  getInitialState() {
+  initialState() {
     return {
       email: this.props.user.email || '',
       code: '',
@@ -18,13 +18,15 @@ class ConfirmRegistration extends React.Component {
     };
   }
 
-  handleChange(name) {
-    return value => this.setState({ ...this.state, [name]: value });
+  state = this.initialState()
+
+  handleChange = (name) =>{
+    return (value) => this.setState({ ...this.state, [name]: value });
   }
 
-  confirmRegistration() {
+  handleRegistrationConfirmation = () => {
     const onSuccess = () => {
-      this.setState({ ...this.getInitialState(), success: true });
+      this.setState({ ...this.initialState(), success: true });
     };
 
     const onFailure = (error) => {
@@ -41,7 +43,7 @@ class ConfirmRegistration extends React.Component {
     });
   }
 
-  requestCodeAgain() {
+  handleRequestingCodeAgain = () => {
     const onSuccess = () => {
       this.setState({ ...this.state, code: '', loading: false });
     };
@@ -81,9 +83,9 @@ class ConfirmRegistration extends React.Component {
         {this.state.loading
           ? <Loader text="Confirming registration code..." />
           : <div>
-            <Button label="Confirm registration" onClick={this.confirmRegistration} raised primary />
+            <Button label="Confirm registration" onClick={this.handleRegistrationConfirmation} raised primary />
             &nbsp;
-            <Button label="Request code again" onClick={this.requestCodeAgain} />
+            <Button label="Request code again" onClick={ this.handleRequestingCodeAgain} />
           </div>
         }
         {this.state.success && <Redirect push to="/profile/sign-in" />}
