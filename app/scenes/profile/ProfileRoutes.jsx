@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { PrivateRoute, PublicRoute } from '../../components/routes';
 import ConfirmRegistration from './ConfirmRegistration';
 import { Auth, User } from '../../services/auth';

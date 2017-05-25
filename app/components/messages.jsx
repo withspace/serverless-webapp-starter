@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { FontIcon } from 'react-toolbox/lib/font_icon';
 import { ProgressBar } from 'react-toolbox/lib/progress_bar';
 

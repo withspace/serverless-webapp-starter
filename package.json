@@ -35,23 +35,20 @@
     "json-loader": "^0.5.4",
     "node-sass": "^4.5.2",
     "postcss-cssnext": "^2.10.0",
-    "postcss-each": "^0.9.3",
+    "postcss-each": "^0.10.0",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.5",
     "postcss-mixins": "^6.0.0",
     "sass-loader": "^6.0.3",
-    "style-loader": "^0.17.0",
+    "style-loader": "^0.18.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"
   },
   "dependencies": {
     "amazon-cognito-identity-js": "^1.18.0",
-    "classnames": "^2.2.0",
-    "prop-types": "^15.5.7",
-    "react": "^0.14 || ~15.4.0",
-    "react-addons-css-transition-group": "^0.14.0 || ~15.4.0",
-    "react-dom": "^0.14.0 || ~15.4.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
-    "react-toolbox": "^2.0.0-beta.8"
+    "react-toolbox": "^2.0.0-beta.11"
   }
 }
