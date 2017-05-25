@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'react-toolbox/lib/button';
 import { Input } from 'react-toolbox/lib/input';
 import { ErrorMessage, Loader } from '../../components/messages';
