@@ -1,18 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import Auth from '../profile/Auth';
-import User from '../profile/User';
-import { headerStyles } from './Header';
+import headerStyles from './headerStyles';
 
-export default function ProfileMenu({ auth, user }) {
-  const handleSignOut = () => {
-    auth.signOut({ email: user.email });
-  };
-
+export default function ProfileMenu() {
   return (
     <div>
       <Link style={headerStyles.link} to="/profile/home">Profile</Link>
-      <a href="#" role="button" style={headerStyles.link} onClick={handleSignOut}>Sign Out</a>
+      <Link style={headerStyles.link} to="/profile/sign-out">Sign out</Link>
       {/*
        Currently we handle this feature with Links, like in case of Register/Sign In. There seems
        to be a bug with icon menu (and menu in the current version of React Toolbox and
@@ -26,8 +20,3 @@ export default function ProfileMenu({ auth, user }) {
     </div>
   );
 }
-
-ProfileMenu.propTypes = {
-  auth: PropTypes.instanceOf(Auth).isRequired,
-  user: PropTypes.instanceOf(User).isRequired,
-};

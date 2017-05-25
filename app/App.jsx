@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Layout } from 'react-toolbox/lib/layout';
-import Header from './header/Header';
-import Auth from './profile/Auth';
-import User from './profile/User';
-import Routes from './Routes';
+import Header from './components/Header';
+import { Auth, User } from './services/auth';
+import Routes from './scenes/Routes';
 
 class App extends Component {
 
@@ -32,4 +32,5 @@ class App extends Component {
   }
 }
 
-export default App;
+/* global document:true */
+ReactDOM.render(<App />, document.getElementById('app'));

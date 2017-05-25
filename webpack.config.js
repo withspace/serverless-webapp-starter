@@ -35,7 +35,7 @@ const JSONLoader = {
 
 module.exports = {
   entry: [
-    './app/index.jsx',
+    './app/index.js',
   ],
   output: {
     path: `${__dirname}/dist`,

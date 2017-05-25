@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import User from './User';
+import { User } from '../../services/auth';
 
 export default function Profile({ user }) {
   return (

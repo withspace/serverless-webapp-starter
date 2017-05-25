@@ -2,9 +2,8 @@ import React, { PropTypes } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Button } from 'react-toolbox/lib/button';
 import { Input } from 'react-toolbox/lib/input';
-import { ErrorMessage, Loader } from '../common/messages';
-import Auth from './Auth';
-import User from './User';
+import { ErrorMessage, Loader } from '../../components/messages';
+import { Auth, User } from '../../services/auth';
 
 export default class ConfirmRegistration extends React.Component {
 
