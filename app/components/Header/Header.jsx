@@ -2,19 +2,9 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar } from 'react-toolbox/lib/app_bar';
 import { Navigation } from 'react-toolbox/lib/navigation';
-import Auth from '../profile/Auth';
-import User from '../profile/User';
+import { Auth, User } from '../../services/auth';
 import ProfileMenu from './ProfileMenu';
-
-export const headerStyles = {
-  link: {
-    cursor: 'pointer',
-    textDecoration: 'none',
-    color: 'inherit',
-    textTransform: 'uppercase',
-    marginLeft: '24px',
-  },
-};
+import headerStyles from './headerStyles';
 
 function SignInButtons() {
   return (

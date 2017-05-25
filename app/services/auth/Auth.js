@@ -1,12 +1,14 @@
-import User from './User';
+import { User } from '.';
 import CognitoService from './CognitoService';
 
 export default class Auth {
 
   constructor({ updateUser }) {
     this.updateUser = (user) => {
-      console.log('Update user', user);
-      updateUser(user);
+      setTimeout(() => {
+        console.log('Update user', user);
+        updateUser(user);
+      });
     };
 
     this.cognito = new CognitoService();

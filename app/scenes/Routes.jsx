@@ -1,14 +1,12 @@
 import React, { PropTypes } from 'react';
-import { DefaultRoute } from './common/routes';
-import Home from './home/Home';
-import Auth from './profile/Auth';
+import HomeRoutes from './home/index';
+import { Auth, User } from '../services/auth';
 import ProfileRoutes from './profile/ProfileRoutes';
-import User from './profile/User';
 
 function Routes({ user, auth }) {
   return (
     <div>
-      <DefaultRoute exact path="/" component={Home} />
+      <HomeRoutes />
       <ProfileRoutes user={user} auth={auth} />
     </div>
   );

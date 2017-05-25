@@ -1,5 +1,5 @@
 import { AuthenticationDetails, CognitoUserPool, CognitoUserAttribute, CognitoUser } from 'amazon-cognito-identity-js';
-import cognitoConfig from '../config';
+import cognitoConfig from './cognitoConfig';
 
 export default class CognitoService {
 

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import User from '../profile/User';
+import { User } from '../services/auth';
 
 const mergedProps = (...props) => Object.assign({}, ...props);
 

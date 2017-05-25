@@ -1,19 +1,17 @@
 import React, { PropTypes } from 'react';
-import { Link, Redirect } from 'react-router-dom';
 import { Button } from 'react-toolbox/lib/button';
 import { Input } from 'react-toolbox/lib/input';
-import { ErrorMessage, Loader } from '../common/messages';
-import Auth from './Auth';
+import { ErrorMessage, Loader } from '../../components/messages';
+import { Auth, User } from '../../services/auth';
 
-export default class Register extends React.Component {
+export default class SignIn extends React.Component {
 
   state = this.initialState();
 
   initialState() {
     return {
-      email: '',
+      email: this.props.user.email || '',
       password: '',
-      passwordRepeated: '',
       error: null,
       loading: false,
       success: false,
@@ -22,18 +20,18 @@ export default class Register extends React.Component {
 
   handleChange = name => value => this.setState({ ...this.state, [name]: value });
 
-  handleRegistration = () => {
+  handleSignIn = () => {
     const onSuccess = () => {
-      this.setState({ ...this.initialState(), success: true });
+      // nothing
     };
 
     const onFailure = (error) => {
       this.setState({ ...this.state, error, loading: false });
     };
 
-    this.setState({ ...this.state, loading: true });
+    this.setState({ ...this.state, password: '', loading: true });
 
-    this.props.auth.register({
+    this.props.auth.signIn({
       email: this.state.email,
       password: this.state.password,
       onSuccess,
@@ -44,9 +42,7 @@ export default class Register extends React.Component {
   render() {
     return (
       <div>
-        <h1>Register</h1>
-        Already registered? <Link to="/profile/sign-in">Sign in</Link> or <Link to="/profile/confirm-registration">confirm
-        registration</Link>.
+        <h1>Sign in</h1>
         <Input
           type="text"
           label="E-mail Address"
@@ -61,24 +57,17 @@ export default class Register extends React.Component {
           value={this.state.password}
           onChange={this.handleChange('password')}
         />
-        <Input
-          type="password"
-          label="Repeat password"
-          name="passwordRepeated"
-          value={this.state.passwordRepeated}
-          onChange={this.handleChange('passwordRepeated')}
-        />
         {this.state.error && <ErrorMessage text={this.state.error.message} />}
-        {this.state.loading
-          ? <Loader text="Registering user..." />
-          : <Button label="Register" onClick={this.handleRegistration} raised primary />
+        {this.state.loading ?
+          <Loader text="Signing in..." /> :
+          <Button label="Sign in" onClick={this.handleSignIn} raised primary />
         }
-        {this.state.success && <Redirect push to="/profile/confirm-registration" />}
       </div>
     );
   }
 }
 
-Register.propTypes = {
+SignIn.propTypes = {
   auth: PropTypes.instanceOf(Auth).isRequired,
+  user: PropTypes.instanceOf(User).isRequired,
 };

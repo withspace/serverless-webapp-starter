@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
-import { PrivateRoute, PublicRoute } from '../common/routes';
+import { PrivateRoute, PublicRoute } from '../../components/routes';
 import ConfirmRegistration from './ConfirmRegistration';
-import Auth from './Auth';
+import { Auth, User } from '../../services/auth';
 import Profile from './Profile';
 import Register from './Register';
 import SignIn from './SignIn';
-import User from './User';
+import SignOut from './SignOut';
 
 export default function ProfileRoutes({ user, auth }) {
   return (
@@ -14,6 +14,7 @@ export default function ProfileRoutes({ user, auth }) {
       <PublicRoute path="/profile/register" component={Register} user={user} auth={auth} />
       <PublicRoute path="/profile/confirm-registration" component={ConfirmRegistration} user={user} auth={auth} />
       <PrivateRoute path="/profile/home" component={Profile} user={user} />
+      <PrivateRoute path="/profile/sign-out" component={SignOut} user={user} auth={auth} />
     </div>
   );
 }
