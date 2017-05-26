@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "Serverless web application starter with Webpack, React.js and Amazon Cognito.",
   "scripts": {
-    "lint": "eslint . --ext .js --ext .jsx --fix",
+    "lint-app": "eslint . --ext .js,.jsx --fix --ignore-pattern *.spec.js*",
+    "lint-tests": "eslint . --ext .spec.js,.spec.jsx --fix --rule 'import/no-extraneous-dependencies: 0' --rule 'no-undef: 0'",
+    "lint": "yarn run lint-app && yarn run lint-tests",
     "start": "COGNITO_POOL_ID='eu-central-1_tVle9U0Pj' COGNITO_APP_CLIENT_ID='es5skki6qdv5i574n4cqbsc8e' webpack-dev-server --content-base app --port 9090 --inline --hot",
     "build": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "reset-deps": "rm -rf ./node_modules/* && rm -f ./npm-shrinkwrap.json && npm install && npm shrinkwrap -u"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
     "babel-loader": "^7.0.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-2": "^6.22.0",
     "css-loader": "^0.28.1",
@@ -54,5 +56,15 @@
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
     "react-toolbox": "^2.0.0-beta.11"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    "globals": {
+      "COGNITO_POOL_ID": "test-pool-id-123",
+      "COGNITO_APP_CLIENT_ID": "test-app-client-id-123"
+    }
   }
 }

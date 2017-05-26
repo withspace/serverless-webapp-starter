@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly for signed in user 1`] = `
+<header
+  className=""
+  data-react-toolbox="app-bar"
+>
+  <div
+    className={undefined}
+  >
+    <button
+      className=" undefined"
+      data-react-toolbox="button"
+      disabled={false}
+      href={undefined}
+      onClick={undefined}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchStart={[Function]}
+      type="button"
+    >
+      <span
+        aria-label=""
+        className="material-icons"
+        data-react-toolbox="font-icon"
+      >
+        menu
+      </span>
+    </button>
+    <h1
+      className=""
+    >
+      Serverless WebApp Starter
+    </h1>
+    <nav
+      className=""
+      data-react-toolbox="navigation"
+    >
+      <div>
+        <a
+          href="/profile/home"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "inherit",
+              "cursor": "pointer",
+              "marginLeft": "24px",
+              "textDecoration": "none",
+              "textTransform": "uppercase",
+            }
+          }
+        >
+          Profile
+        </a>
+        <a
+          href="/profile/sign-out"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "inherit",
+              "cursor": "pointer",
+              "marginLeft": "24px",
+              "textDecoration": "none",
+              "textTransform": "uppercase",
+            }
+          }
+        >
+          Sign out
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+`;
+
+exports[`renders correctly for signed out user 1`] = `
+<header
+  className=""
+  data-react-toolbox="app-bar"
+>
+  <div
+    className={undefined}
+  >
+    <button
+      className=" undefined"
+      data-react-toolbox="button"
+      disabled={false}
+      href={undefined}
+      onClick={undefined}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchStart={[Function]}
+      type="button"
+    >
+      <span
+        aria-label=""
+        className="material-icons"
+        data-react-toolbox="font-icon"
+      >
+        menu
+      </span>
+    </button>
+    <h1
+      className=""
+    >
+      Serverless WebApp Starter
+    </h1>
+    <nav
+      className=""
+      data-react-toolbox="navigation"
+    >
+      <div>
+        <a
+          href="/profile/register"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "inherit",
+              "cursor": "pointer",
+              "marginLeft": "24px",
+              "textDecoration": "none",
+              "textTransform": "uppercase",
+            }
+          }
+        >
+          Register
+        </a>
+        <a
+          href="/profile/sign-in"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "inherit",
+              "cursor": "pointer",
+              "marginLeft": "24px",
+              "textDecoration": "none",
+              "textTransform": "uppercase",
+            }
+          }
+        >
+          Sign In
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+`;
