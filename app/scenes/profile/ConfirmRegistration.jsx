@@ -22,14 +22,14 @@ class ConfirmRegistration extends React.Component {
   handleRegistrationConfirmation = () => {
     const onSuccess = () => {
       this.setState(this.initialState());
-      this.props.formState.handleSuccess(<Redirect push to="/profile/sign-in" />);
+      this.props.form.handleSuccess(<Redirect push to="/profile/sign-in" />);
     };
 
     const onFailure = (error) => {
-      this.props.formState.handleFailure(error.message);
+      this.props.form.handleFailure(error.message);
     };
 
-    this.props.formState.startLoading('Confirming registration...');
+    this.props.form.startLoading('Confirming registration...');
 
     this.props.auth.confirmRegistration({
       email: this.state.email,
@@ -42,14 +42,14 @@ class ConfirmRegistration extends React.Component {
   handleRequestingCodeAgain = () => {
     const onSuccess = () => {
       this.setState({ ...this.state, code: '' });
-      this.props.formState.handleSuccess();
+      this.props.form.handleSuccess();
     };
 
     const onFailure = (error) => {
-      this.props.formState.handleFailure(error.message);
+      this.props.form.handleFailure(error.message);
     };
 
-    this.props.formState.startLoading('Sending confirmation code...');
+    this.props.form.startLoading('Sending confirmation code...');
 
     this.props.auth.requestCodeAgain({
       email: this.state.email,
@@ -62,7 +62,7 @@ class ConfirmRegistration extends React.Component {
     return (
       <div>
         <h1>Confirm registration</h1>
-        {this.props.formState.infoComponent}
+        {this.props.form.infoComponent}
         <Input
           type="text"
           label="E-mail Address"
@@ -87,7 +87,7 @@ class ConfirmRegistration extends React.Component {
 
 ConfirmRegistration.propTypes = {
   auth: PropTypes.instanceOf(Auth).isRequired,
-  formState: PropTypes.instanceOf(FormState).isRequired,
+  form: PropTypes.instanceOf(FormState).isRequired,
   user: PropTypes.instanceOf(User).isRequired,
 };
 

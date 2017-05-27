@@ -23,14 +23,14 @@ class Register extends React.Component {
   handleRegistration = () => {
     const onSuccess = () => {
       this.setState({ ...Register.initialState(), success: true });
-      this.props.formState.handleSuccess(<Redirect push to="/profile/confirm-registration" />);
+      this.props.form.handleSuccess(<Redirect push to="/profile/confirm-registration" />);
     };
 
     const onFailure = (error) => {
-      this.props.formState.handleFailure(error.message);
+      this.props.form.handleFailure(error.message);
     };
 
-    this.props.formState.startLoading('Registering...');
+    this.props.form.startLoading('Registering...');
 
     this.props.auth.register({
       email: this.state.email,
@@ -46,7 +46,7 @@ class Register extends React.Component {
         <h1>Register</h1>
         Already registered? <Link to="/profile/sign-in">Sign in</Link> or <Link to="/profile/confirm-registration">confirm
         registration</Link>.
-        {this.props.formState.infoComponent}
+        {this.props.form.infoComponent}
         <Input
           type="text"
           label="E-mail Address"
@@ -76,7 +76,7 @@ class Register extends React.Component {
 
 Register.propTypes = {
   auth: PropTypes.instanceOf(Auth).isRequired,
-  formState: PropTypes.instanceOf(FormState).isRequired,
+  form: PropTypes.instanceOf(FormState).isRequired,
 };
 
 const RegisterExt = withFormState(Register);

@@ -24,10 +24,10 @@ class SignIn extends React.Component {
     };
 
     const onFailure = (error) => {
-      this.props.formState.handleFailure(error.message);
+      this.props.form.handleFailure(error.message);
     };
 
-    this.props.formState.startLoading('Signing in...');
+    this.props.form.startLoading('Signing in...');
 
     this.props.auth.signIn({
       email: this.state.email,
@@ -41,7 +41,7 @@ class SignIn extends React.Component {
     return (
       <div>
         <h1>Sign in</h1>
-        {this.props.formState.infoComponent}
+        {this.props.form.infoComponent}
         <Input
           type="text"
           label="E-mail Address"
@@ -64,7 +64,7 @@ class SignIn extends React.Component {
 
 SignIn.propTypes = {
   auth: PropTypes.instanceOf(Auth).isRequired,
-  formState: PropTypes.instanceOf(FormState).isRequired,
+  form: PropTypes.instanceOf(FormState).isRequired,
   user: PropTypes.instanceOf(User).isRequired,
 };
 

@@ -18,13 +18,13 @@ export default function withFormState(WrappedComponent) {
     startLoading = info => this.setState({ ...this.state, loading: info });
 
     render() {
-      const formState = new FormState({
+      const form = new FormState({
         startLoading: this.startLoading,
         handleFailure: this.handleFailure,
         handleSuccess: this.handleSuccess,
         infoComponent: <FormStateInfo {...this.state} />,
       });
-      return <WrappedComponent formState={formState} {...this.props} />;
+      return <WrappedComponent form={form} {...this.props} />;
     }
   }
 
