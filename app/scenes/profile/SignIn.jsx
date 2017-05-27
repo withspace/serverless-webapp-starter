@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-toolbox/lib/button';
 import { Input } from 'react-toolbox/lib/input';
-import { ErrorMessage, Loader } from '../../components/messages';
+import { FormState, withFormState } from '../../components/withFormState';
 import { Auth, User } from '../../services/auth';
 
-export default class SignIn extends React.Component {
+class SignIn extends React.Component {
 
   state = this.initialState();
 
@@ -13,9 +13,6 @@ export default class SignIn extends React.Component {
     return {
       email: this.props.user.email || '',
       password: '',
-      error: null,
-      loading: false,
-      success: false,
     };
   }
 
@@ -27,10 +24,10 @@ export default class SignIn extends React.Component {
     };
 
     const onFailure = (error) => {
-      this.setState({ ...this.state, error, loading: false });
+      this.props.formState.handleFailure(error.message);
     };
 
-    this.setState({ ...this.state, password: '', loading: true });
+    this.props.formState.startLoading('Signing in...');
 
     this.props.auth.signIn({
       email: this.state.email,
@@ -44,6 +41,7 @@ export default class SignIn extends React.Component {
     return (
       <div>
         <h1>Sign in</h1>
+        {this.props.formState.infoComponent}
         <Input
           type="text"
           label="E-mail Address"
@@ -58,11 +56,7 @@ export default class SignIn extends React.Component {
           value={this.state.password}
           onChange={this.handleChange('password')}
         />
-        {this.state.error && <ErrorMessage text={this.state.error.message} />}
-        {this.state.loading ?
-          <Loader text="Signing in..." /> :
-          <Button label="Sign in" onClick={this.handleSignIn} raised primary />
-        }
+        <Button label="Sign in" onClick={this.handleSignIn} raised primary />
       </div>
     );
   }
@@ -70,5 +64,9 @@ export default class SignIn extends React.Component {
 
 SignIn.propTypes = {
   auth: PropTypes.instanceOf(Auth).isRequired,
+  formState: PropTypes.instanceOf(FormState).isRequired,
   user: PropTypes.instanceOf(User).isRequired,
 };
+
+const SignInExt = withFormState(SignIn);
+export default SignInExt;
