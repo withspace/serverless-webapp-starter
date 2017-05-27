@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { Button } from 'react-toolbox/lib/button';
 import { Input } from 'react-toolbox/lib/input';
-import { ErrorMessage, Loader } from '../../components/messages';
+import { withFormState, FormState } from '../../components/withFormState';
 import { Auth, User } from '../../services/auth';
 
-export default class ConfirmRegistration extends React.Component {
+class ConfirmRegistration extends React.Component {
 
   state = this.initialState();
 
@@ -14,9 +14,6 @@ export default class ConfirmRegistration extends React.Component {
     return {
       email: this.props.user.email || '',
       code: '',
-      error: null,
-      loading: false,
-      success: false,
     };
   }
 
@@ -24,14 +21,15 @@ export default class ConfirmRegistration extends React.Component {
 
   handleRegistrationConfirmation = () => {
     const onSuccess = () => {
-      this.setState({ ...this.initialState(), success: true });
+      this.setState(this.initialState());
+      this.props.formState.handleSuccess(<Redirect push to="/profile/sign-in" />);
     };
 
     const onFailure = (error) => {
-      this.setState({ ...this.state, error, loading: false });
+      this.props.formState.handleFailure(error.message);
     };
 
-    this.setState({ ...this.state, loading: true });
+    this.props.formState.startLoading('Confirming registration...');
 
     this.props.auth.confirmRegistration({
       email: this.state.email,
@@ -43,14 +41,15 @@ export default class ConfirmRegistration extends React.Component {
 
   handleRequestingCodeAgain = () => {
     const onSuccess = () => {
-      this.setState({ ...this.state, code: '', loading: false });
+      this.setState({ ...this.state, code: '' });
+      this.props.formState.handleSuccess();
     };
 
     const onFailure = (error) => {
-      this.setState({ ...this.state, error, loading: false });
+      this.props.formState.handleFailure(error.message);
     };
 
-    this.setState({ ...this.state, loading: true });
+    this.props.formState.startLoading('Sending confirmation code...');
 
     this.props.auth.requestCodeAgain({
       email: this.state.email,
@@ -63,6 +62,7 @@ export default class ConfirmRegistration extends React.Component {
     return (
       <div>
         <h1>Confirm registration</h1>
+        {this.props.formState.infoComponent}
         <Input
           type="text"
           label="E-mail Address"
@@ -77,23 +77,19 @@ export default class ConfirmRegistration extends React.Component {
           value={this.state.code}
           onChange={this.handleChange('code')}
         />
-        {this.state.error && <ErrorMessage text={this.state.error.message} />}
-        {this.state.loading
-          ? <Loader text="Confirming registration code..." />
-          : <div>
-            <Button label="Confirm registration" onClick={this.handleRegistrationConfirmation} raised primary />
-            &nbsp;
-            <Button label="Request code again" onClick={this.handleRequestingCodeAgain} />
-          </div>
-        }
-        {this.state.success && <Redirect push to="/profile/sign-in" />}
+        <Button label="Confirm registration" onClick={this.handleRegistrationConfirmation} raised primary />
+        &nbsp;
+        <Button label="Request code again" onClick={this.handleRequestingCodeAgain} />
       </div>
     );
   }
 }
 
-
 ConfirmRegistration.propTypes = {
   auth: PropTypes.instanceOf(Auth).isRequired,
+  formState: PropTypes.instanceOf(FormState).isRequired,
   user: PropTypes.instanceOf(User).isRequired,
 };
+
+const ConfirmRegistrationExt = withFormState(ConfirmRegistration);
+export default ConfirmRegistrationExt;
