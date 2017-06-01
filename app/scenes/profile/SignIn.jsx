@@ -2,21 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-toolbox/lib/button';
 import { Input } from 'react-toolbox/lib/input';
+import { FormFields, withFormFields } from '../../components/withFormFields';
 import { FormState, withFormState } from '../../components/withFormState';
 import { Auth, User } from '../../services/auth';
 
 class SignIn extends React.Component {
-
-  state = this.initialState();
-
-  initialState() {
-    return {
-      email: this.props.user.email || '',
-      password: '',
-    };
-  }
-
-  handleChange = name => value => this.setState({ ...this.state, [name]: value });
 
   handleSignIn = () => {
     const onSuccess = () => {
@@ -30,8 +20,8 @@ class SignIn extends React.Component {
     this.props.form.startLoading('Signing in...');
 
     this.props.auth.signIn({
-      email: this.state.email,
-      password: this.state.password,
+      email: this.props.fields.values.email,
+      password: this.props.fields.values.password,
       onSuccess,
       onFailure,
     });
@@ -46,15 +36,15 @@ class SignIn extends React.Component {
           type="text"
           label="E-mail Address"
           name="email"
-          value={this.state.email}
-          onChange={this.handleChange('email')}
+          value={this.props.fields.values.email}
+          onChange={this.props.fields.handleChange('email')}
         />
         <Input
           type="password"
           label="Password"
           name="password"
-          value={this.state.password}
-          onChange={this.handleChange('password')}
+          value={this.props.fields.values.password}
+          onChange={this.props.fields.handleChange('password')}
         />
         <Button label="Sign in" onClick={this.handleSignIn} raised primary />
       </div>
@@ -64,9 +54,14 @@ class SignIn extends React.Component {
 
 SignIn.propTypes = {
   auth: PropTypes.instanceOf(Auth).isRequired,
+  fields: PropTypes.instanceOf(FormFields).isRequired,
   form: PropTypes.instanceOf(FormState).isRequired,
   user: PropTypes.instanceOf(User).isRequired,
 };
 
-const SignInExt = withFormState(SignIn);
+const SignInExt = withFormState(withFormFields(
+  SignIn,
+  ({ user }) => ({ email: user.email || '', password: '' }),
+));
+
 export default SignInExt;
