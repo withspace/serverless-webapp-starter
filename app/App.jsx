@@ -13,7 +13,7 @@ class App extends Component {
   };
 
   auth = new Auth({
-    updateUser: user => this.setState({ ...this.state, user }),
+    updateUser: (user) => this.setState({ ...this.state, user }),
   });
 
   render() {
