@@ -61,7 +61,7 @@ export default class CognitoService {
 
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: () => onSuccess(),
-      onFailure: error => onFailure(error),
+      onFailure: (error) => onFailure(error),
     });
   }
 

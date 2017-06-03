@@ -6,6 +6,6 @@ export default class User {
   }
 }
 
-User.signedIn = email => new User(email, true);
+User.signedIn = (email) => new User(email, true);
 
-User.signedOut = email => new User(email, false);
+User.signedOut = (email) => new User(email, false);

@@ -3,7 +3,9 @@ node_js:
   - "stable"
 sudo: false
 cache:
+  yarn: true
   directories:
     - node_modules
 script:
+  - npm run lint
   - npm test
