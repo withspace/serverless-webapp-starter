@@ -8,13 +8,15 @@ export default function withFormFields(WrappedComponent, getDefaultValues) {
       fields: getDefaultValues(this.props),
     };
 
-    handleChange = name => value => {
+    handleChange = (name) => (value) => {
       const fields = { ...this.state.fields, [name]: value };
       this.setState({ fields });
     };
 
+    reset = () => this.setState({ fields: getDefaultValues(this.props) });
+
     render() {
-      const fields = new FormFields(this.state.fields, this.handleChange);
+      const fields = new FormFields(this.state.fields, this.handleChange, this.reset);
       return <WrappedComponent fields={fields} {...this.props} />;
     }
   }

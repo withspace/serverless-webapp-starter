@@ -11,13 +11,17 @@ const messageStyles = {
   loading: {
     color: 'gray',
   },
+  success: {
+    color: 'forestgreen',
+    margin: '1em 0',
+  },
   loadingIcon: {
     width: '2em',
     height: '2em',
   },
   messageIcon: {
     float: 'left',
-    marginTop: '-0.2em',
+    marginTop: '-0.3em',
     fontSize: '2em',
   },
   messageText: {
@@ -25,28 +29,41 @@ const messageStyles = {
   },
 };
 
-export function ErrorMessage({ text }) {
+export function ErrorMessage({ children }) {
   return (
     <div style={messageStyles.error}>
-      <FontIcon style={messageStyles.messageIcon}>error_outline</FontIcon>
-      <div style={messageStyles.messageText}>{text}</div>
+      <FontIcon style={messageStyles.messageIcon}>priority_high</FontIcon>
+      <div style={messageStyles.messageText}>{children}</div>
     </div>
   );
 }
 
 ErrorMessage.propTypes = {
-  text: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
-export function Loader({ text }) {
+export function Loader({ children }) {
   return (
     <div style={messageStyles.loading}>
       <ProgressBar type="linear" mode="indeterminate" />
-      <div>{text}</div>
+      <div>{children}</div>
     </div>
   );
 }
 
 Loader.propTypes = {
-  text: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
+};
+
+export function SuccessMessage({ children }) {
+  return (
+    <div style={messageStyles.success}>
+      <FontIcon style={messageStyles.messageIcon}>check</FontIcon>
+      <div style={messageStyles.messageText}>{children}</div>
+    </div>
+  );
+}
+
+SuccessMessage.propTypes = {
+  children: PropTypes.element.isRequired,
 };

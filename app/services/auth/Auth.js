@@ -5,10 +5,8 @@ export default class Auth {
 
   constructor({ updateUser }) {
     this.updateUser = (user) => {
-      setTimeout(() => {
-        console.log('Update user', user);
-        updateUser(user);
-      });
+      console.log('Update user', user);
+      updateUser(user);
     };
 
     this.cognito = new CognitoService();

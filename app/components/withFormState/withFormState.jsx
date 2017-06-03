@@ -11,15 +11,18 @@ export default function withFormState(WrappedComponent) {
       success: null,
     };
 
-    handleFailure = info => this.setState({ ...this.state, error: info, loading: null });
+    handleFailure = (info) => this.setState({ loading: null, error: info, success: null });
 
-    handleSuccess = info => this.setState({ ...this.state, success: info, loading: null });
+    handleSuccess = (info) => this.setState({ loading: null, error: null, success: info });
 
-    startLoading = info => this.setState({ ...this.state, loading: info });
+    submit = (operation, info) => {
+      this.setState({ ...this.state, loading: info });
+      return operation();
+    };
 
     render() {
       const form = new FormState({
-        startLoading: this.startLoading,
+        submit: this.submit,
         handleFailure: this.handleFailure,
         handleSuccess: this.handleSuccess,
         infoComponent: <FormStateInfo {...this.state} />,

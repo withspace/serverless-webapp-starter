@@ -6,50 +6,45 @@ import { FormFields, withFormFields } from '../../components/withFormFields';
 import { FormState, withFormState } from '../../components/withFormState';
 import { Auth, User } from '../../services/auth';
 
-class SignIn extends React.Component {
-
-  handleSignIn = () => {
-    const onSuccess = () => {
-      // nothing
-    };
-
-    const onFailure = (error) => {
-      this.props.form.handleFailure(error.message);
-    };
-
-    this.props.form.startLoading('Signing in...');
-
-    this.props.auth.signIn({
-      email: this.props.fields.values.email,
-      password: this.props.fields.values.password,
-      onSuccess,
-      onFailure,
+function signIn({ auth, form, fields }) {
+  const action = () =>
+    auth.signIn({
+      email: fields.values.email,
+      password: fields.values.password,
+      onSuccess: () => { /* nothing */ },
+      onFailure: (error) => form.handleFailure(error.message),
     });
-  };
 
-  render() {
-    return (
-      <div>
-        <h1>Sign in</h1>
-        {this.props.form.infoComponent}
-        <Input
-          type="text"
-          label="E-mail Address"
-          name="email"
-          value={this.props.fields.values.email}
-          onChange={this.props.fields.handleChange('email')}
-        />
-        <Input
-          type="password"
-          label="Password"
-          name="password"
-          value={this.props.fields.values.password}
-          onChange={this.props.fields.handleChange('password')}
-        />
-        <Button label="Sign in" onClick={this.handleSignIn} raised primary />
-      </div>
-    );
-  }
+  form.submit(action, 'Signing in...');
+}
+
+function SignIn({ auth, form, fields }) {
+  return (
+    <div>
+      <h1>Sign in</h1>
+      {form.infoComponent}
+      <Input
+        type="text"
+        label="E-mail Address"
+        name="email"
+        value={fields.values.email}
+        onChange={fields.handleChange('email')}
+      />
+      <Input
+        type="password"
+        label="Password"
+        name="password"
+        value={fields.values.password}
+        onChange={fields.handleChange('password')}
+      />
+      <Button
+        label="Sign in"
+        onClick={() => signIn({ auth, form, fields })}
+        raised
+        primary
+      />
+    </div>
+  );
 }
 
 SignIn.propTypes = {

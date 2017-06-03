@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ErrorMessage, Loader } from './../messages';
+import { ErrorMessage, Loader, SuccessMessage } from './../messages';
 
 export default function FormStateInfo({ loading, error, success }) {
-  if (loading) { return <Loader text={loading} />; }
-  if (error) { return <ErrorMessage text={error} />; }
-  if (success) { return <div>{success}</div>; }
+  if (loading) { return <Loader >{loading}</Loader>; }
+  if (error) { return <ErrorMessage>{error}</ErrorMessage>; }
+  if (success) { return <SuccessMessage> {success}</SuccessMessage>; }
   return <div />;
 }
 
