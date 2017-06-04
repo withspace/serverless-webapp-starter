@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Auth, User } from '../../services/auth';
 import { Loader } from '../../components/messages';
 
 export default function SignOut({ auth, user }) {
-  auth.signOut({ email: user.email });
+  setTimeout(() => auth.signOut({ email: user.email }));
   return <Loader text={`Signing out ${user.email}...`} />;
 }
 

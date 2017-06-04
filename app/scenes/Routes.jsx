@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import HomeRoutes from './home/index';
 import { Auth, User } from '../services/auth';
 import ProfileRoutes from './profile/ProfileRoutes';

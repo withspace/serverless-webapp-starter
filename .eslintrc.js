@@ -6,4 +6,9 @@ module.exports = {
     "import"
   ],
   "parser": "babel-eslint",
+  "rules": {
+    // disable detecting of unused PropTypes because it leads to many false positives for HoCs
+    "react/no-unused-prop-types": 0,
+    "arrow-parens": ["error", "always"]
+  }
 };

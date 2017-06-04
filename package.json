@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "Serverless web application starter with Webpack, React.js and Amazon Cognito.",
   "scripts": {
-    "lint": "eslint . --ext .js --ext .jsx --fix",
+    "lint-app": "eslint . --ext .js,.jsx --fix --ignore-pattern *.spec.js*",
+    "lint-tests": "eslint . --ext .spec.js,.spec.jsx --fix --rule 'import/no-extraneous-dependencies: 0' --rule 'no-undef: 0'",
+    "lint": "yarn run lint-app && yarn run lint-tests",
     "start": "COGNITO_POOL_ID='eu-central-1_tVle9U0Pj' COGNITO_APP_CLIENT_ID='es5skki6qdv5i574n4cqbsc8e' webpack-dev-server --content-base app --port 9090 --inline --hot",
     "build": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "reset-deps": "rm -rf ./node_modules/* && rm -f ./npm-shrinkwrap.json && npm install && npm shrinkwrap -u"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,9 @@
   "devDependencies": {
     "babel-core": "^6.23.1",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
     "babel-loader": "^7.0.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-2": "^6.22.0",
     "css-loader": "^0.28.1",
@@ -32,26 +35,36 @@
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
     "html-webpack-plugin": "^2.28.0",
+    "jest": "^20.0.4",
     "json-loader": "^0.5.4",
     "node-sass": "^4.5.2",
     "postcss-cssnext": "^2.10.0",
-    "postcss-each": "^0.9.3",
+    "postcss-each": "^0.10.0",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.5",
     "postcss-mixins": "^6.0.0",
+    "react-test-renderer": "^15.5.4",
     "sass-loader": "^6.0.3",
-    "style-loader": "^0.17.0",
+    "style-loader": "^0.18.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"
   },
   "dependencies": {
     "amazon-cognito-identity-js": "^1.18.0",
-    "classnames": "^2.2.0",
-    "prop-types": "^15.5.7",
-    "react": "^0.14 || ~15.4.0",
-    "react-addons-css-transition-group": "^0.14.0 || ~15.4.0",
-    "react-dom": "^0.14.0 || ~15.4.0",
+    "prop-types": "^15.5.10",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
-    "react-toolbox": "^2.0.0-beta.8"
+    "react-toolbox": "^2.0.0-beta.11"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    "globals": {
+      "COGNITO_POOL_ID": "test-pool-id-123",
+      "COGNITO_APP_CLIENT_ID": "test-app-client-id-123"
+    }
   }
 }

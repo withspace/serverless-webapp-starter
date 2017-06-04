@@ -1,11 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import { User } from '../services/auth';
 
 const mergedProps = (...props) => Object.assign({}, ...props);
 
 export function DefaultRoute({ component: Component, ...rest }) {
-  return <Route {...rest} render={props => <Component {...mergedProps(rest, props)} />} />;
+  return <Route {...rest} render={(props) => <Component {...mergedProps(rest, props)} />} />;
 }
 
 DefaultRoute.propTypes = {
