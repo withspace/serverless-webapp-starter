@@ -9,7 +9,7 @@
 Serverless web application starter with Webpack, React.js and Amazon Cognito.
 
 
-#### [Demo here!](https://withspace.github.io/serverless-webapp-starter/)
+### [Demo here!](https://withspace.github.io/serverless-webapp-starter/)
 
 Please notice, that Webpack configuration contains Cognito Pool Id and Cognito App Client Id.
 They are used only for demo purposes and the user data provided for this pool is removed periodically.
