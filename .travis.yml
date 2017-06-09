@@ -7,8 +7,9 @@ cache:
   directories:
     - node_modules
 env:
-  - COGNITO_POOL_ID="eu-central-1_tVle9U0Pj"
-  - COGNITO_APP_CLIENT_ID="es5skki6qdv5i574n4cqbsc8e"
+  global:
+    - COGNITO_POOL_ID="eu-central-1_tVle9U0Pj"
+    - COGNITO_APP_CLIENT_ID="es5skki6qdv5i574n4cqbsc8e"
 script:
   - yarn lint
   - yarn test
