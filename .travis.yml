@@ -6,6 +6,10 @@ cache:
   yarn: true
   directories:
     - node_modules
+env:
+  - COGNITO_POOL_ID="eu-central-1_tVle9U0Pj"
+  - COGNITO_APP_CLIENT_ID="es5skki6qdv5i574n4cqbsc8e"
 script:
-  - npm run lint
-  - npm test
+  - yarn lint
+  - yarn test
+  - yarn build
