@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { Layout } from 'react-toolbox/lib/layout';
 import Header from './components/Header';
 import { Auth, User } from './services/auth';
