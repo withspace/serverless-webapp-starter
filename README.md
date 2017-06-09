@@ -7,8 +7,8 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/withspace/serverless-webapp-starter?branch=master)](https://bettercodehub.com/)
 
 Serverless web application starter with Webpack, React.js and Amazon Cognito.
-**Work in progress**.
 
+<a href="https://withspace.github.io/serverless-webapp-starter/" target="_blank" style="color: white; background-color: cadetblue; display: block; width: 8em; text-align: center; line-height: 2em; font-size: 1.2em; border-radius: .3em;">Demo here</a>
 
 ## Cognito Demo
 
