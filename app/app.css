@@ -9,3 +9,15 @@ h1, h2, h3, h4, h5, h5 {
 nav button {
     color: inherit !important;
 }
+
+@media (max-width: 480px) {
+    .desktopOnly {
+        display: none;
+    }
+}
+
+@media (min-width: 481px) {
+    .mobileOnly {
+        display: none;
+    }
+}
