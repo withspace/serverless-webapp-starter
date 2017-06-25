@@ -8,26 +8,6 @@ exports[`renders correctly for signed in user 1`] = `
   <div
     className={undefined}
   >
-    <button
-      className=" undefined"
-      data-react-toolbox="button"
-      disabled={false}
-      href={undefined}
-      onClick={undefined}
-      onMouseDown={[Function]}
-      onMouseLeave={[Function]}
-      onMouseUp={[Function]}
-      onTouchStart={[Function]}
-      type="button"
-    >
-      <span
-        aria-label=""
-        className="material-icons"
-        data-react-toolbox="font-icon"
-      >
-        menu
-      </span>
-    </button>
     <h1
       className=""
     >
@@ -38,36 +18,145 @@ exports[`renders correctly for signed in user 1`] = `
       data-react-toolbox="navigation"
     >
       <div>
-        <a
-          href="/profile/home"
-          onClick={[Function]}
-          style={
-            Object {
-              "color": "inherit",
-              "cursor": "pointer",
-              "marginLeft": "24px",
-              "textDecoration": "none",
-              "textTransform": "uppercase",
-            }
-          }
+        <div
+          className={undefined}
         >
-          Profile
-        </a>
-        <a
-          href="/profile/sign-out"
-          onClick={[Function]}
-          style={
-            Object {
-              "color": "inherit",
-              "cursor": "pointer",
-              "marginLeft": "24px",
-              "textDecoration": "none",
-              "textTransform": "uppercase",
+          <a
+            href="/profile/home"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "inherit",
+                "cursor": "pointer",
+                "marginLeft": "24px",
+                "textDecoration": "none",
+                "textTransform": "uppercase",
+              }
             }
-          }
+          >
+            Profile
+          </a>
+          <a
+            href="/profile/sign-out"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "inherit",
+                "cursor": "pointer",
+                "marginLeft": "24px",
+                "textDecoration": "none",
+                "textTransform": "uppercase",
+              }
+            }
+          >
+            Sign out
+          </a>
+        </div>
+        <div
+          className={undefined}
         >
-          Sign out
-        </a>
+          <div
+            className=""
+          >
+            <button
+              className=""
+              data-react-toolbox="button"
+              disabled={false}
+              href={undefined}
+              onClick={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchStart={[Function]}
+              type="button"
+            >
+              <span
+                aria-label=""
+                className="material-icons"
+                data-react-toolbox="font-icon"
+              >
+                account_circle
+              </span>
+            </button>
+            <div
+              className=""
+              data-react-toolbox="menu"
+              style={
+                Object {
+                  "height": undefined,
+                  "width": undefined,
+                }
+              }
+            >
+              <div
+                className={undefined}
+                style={
+                  Object {
+                    "height": undefined,
+                    "width": undefined,
+                  }
+                }
+              />
+              <ul
+                className={undefined}
+                style={undefined}
+              >
+                <li
+                  className=""
+                  data-react-toolbox="menu-item"
+                  onClick={[Function]}
+                  onMouseDown={[Function]}
+                  onTouchStart={[Function]}
+                >
+                  <span
+                    className={undefined}
+                  />
+                  <a
+                    href="/profile/home"
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "color": "inherit",
+                        "cursor": "pointer",
+                        "display": "inline-block",
+                        "textDecoration": "none",
+                        "width": "100%",
+                      }
+                    }
+                  >
+                    Profile
+                  </a>
+                </li>
+                <li
+                  className=""
+                  data-react-toolbox="menu-item"
+                  onClick={[Function]}
+                  onMouseDown={[Function]}
+                  onTouchStart={[Function]}
+                >
+                  <span
+                    className={undefined}
+                  />
+                  <a
+                    href="/profile/sign-out"
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "color": "inherit",
+                        "cursor": "pointer",
+                        "display": "inline-block",
+                        "textDecoration": "none",
+                        "width": "100%",
+                      }
+                    }
+                  >
+                    Sign out
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
   </div>
@@ -82,26 +171,6 @@ exports[`renders correctly for signed out user 1`] = `
   <div
     className={undefined}
   >
-    <button
-      className=" undefined"
-      data-react-toolbox="button"
-      disabled={false}
-      href={undefined}
-      onClick={undefined}
-      onMouseDown={[Function]}
-      onMouseLeave={[Function]}
-      onMouseUp={[Function]}
-      onTouchStart={[Function]}
-      type="button"
-    >
-      <span
-        aria-label=""
-        className="material-icons"
-        data-react-toolbox="font-icon"
-      >
-        menu
-      </span>
-    </button>
     <h1
       className=""
     >
@@ -112,36 +181,145 @@ exports[`renders correctly for signed out user 1`] = `
       data-react-toolbox="navigation"
     >
       <div>
-        <a
-          href="/profile/register"
-          onClick={[Function]}
-          style={
-            Object {
-              "color": "inherit",
-              "cursor": "pointer",
-              "marginLeft": "24px",
-              "textDecoration": "none",
-              "textTransform": "uppercase",
-            }
-          }
+        <div
+          className={undefined}
         >
-          Register
-        </a>
-        <a
-          href="/profile/sign-in"
-          onClick={[Function]}
-          style={
-            Object {
-              "color": "inherit",
-              "cursor": "pointer",
-              "marginLeft": "24px",
-              "textDecoration": "none",
-              "textTransform": "uppercase",
+          <a
+            href="/profile/register"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "inherit",
+                "cursor": "pointer",
+                "marginLeft": "24px",
+                "textDecoration": "none",
+                "textTransform": "uppercase",
+              }
             }
-          }
+          >
+            Register
+          </a>
+          <a
+            href="/profile/sign-in"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "inherit",
+                "cursor": "pointer",
+                "marginLeft": "24px",
+                "textDecoration": "none",
+                "textTransform": "uppercase",
+              }
+            }
+          >
+            Sign In
+          </a>
+        </div>
+        <div
+          className={undefined}
         >
-          Sign In
-        </a>
+          <div
+            className=""
+          >
+            <button
+              className=""
+              data-react-toolbox="button"
+              disabled={false}
+              href={undefined}
+              onClick={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchStart={[Function]}
+              type="button"
+            >
+              <span
+                aria-label=""
+                className="material-icons"
+                data-react-toolbox="font-icon"
+              >
+                more_vert
+              </span>
+            </button>
+            <div
+              className=""
+              data-react-toolbox="menu"
+              style={
+                Object {
+                  "height": undefined,
+                  "width": undefined,
+                }
+              }
+            >
+              <div
+                className={undefined}
+                style={
+                  Object {
+                    "height": undefined,
+                    "width": undefined,
+                  }
+                }
+              />
+              <ul
+                className={undefined}
+                style={undefined}
+              >
+                <li
+                  className=""
+                  data-react-toolbox="menu-item"
+                  onClick={[Function]}
+                  onMouseDown={[Function]}
+                  onTouchStart={[Function]}
+                >
+                  <span
+                    className={undefined}
+                  />
+                  <a
+                    href="/profile/register"
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "color": "inherit",
+                        "cursor": "pointer",
+                        "display": "inline-block",
+                        "textDecoration": "none",
+                        "width": "100%",
+                      }
+                    }
+                  >
+                    Register
+                  </a>
+                </li>
+                <li
+                  className=""
+                  data-react-toolbox="menu-item"
+                  onClick={[Function]}
+                  onMouseDown={[Function]}
+                  onTouchStart={[Function]}
+                >
+                  <span
+                    className={undefined}
+                  />
+                  <a
+                    href="/profile/sign-in"
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "color": "inherit",
+                        "cursor": "pointer",
+                        "display": "inline-block",
+                        "textDecoration": "none",
+                        "width": "100%",
+                      }
+                    }
+                  >
+                    Sign in
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
   </div>
