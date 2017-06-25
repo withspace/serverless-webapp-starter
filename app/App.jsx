@@ -22,7 +22,7 @@ class App extends Component {
         <Router>
           <div>
             <Header auth={this.auth} user={this.state.user} />
-            <div style={{ margin: '0 3em' }}>
+            <div style={{ margin: '0 1.5em' }}>
               <Routes auth={this.auth} user={this.state.user} />
             </div>
           </div>
