@@ -39,7 +39,14 @@ export function ErrorMessage({ children }) {
 }
 
 ErrorMessage.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.string,
+  ]),
+};
+
+ErrorMessage.defaultProps = {
+  children: '',
 };
 
 export function Loader({ children }) {
@@ -52,7 +59,14 @@ export function Loader({ children }) {
 }
 
 Loader.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.string,
+  ]),
+};
+
+Loader.defaultProps = {
+  children: '',
 };
 
 export function SuccessMessage({ children }) {
@@ -65,5 +79,12 @@ export function SuccessMessage({ children }) {
 }
 
 SuccessMessage.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.string,
+  ]),
+};
+
+SuccessMessage.defaultProps = {
+  children: '',
 };
