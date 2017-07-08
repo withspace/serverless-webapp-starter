@@ -1,0 +1,11 @@
+.task {
+    display: flex;
+}
+
+.taskButton {
+    padding: 20px 20px 20px 0;
+}
+
+.taskInput {
+    flex: 1;
+}

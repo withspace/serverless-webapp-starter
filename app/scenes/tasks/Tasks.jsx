@@ -1,65 +1,70 @@
 import React from 'react';
-import {Card, CardTitle, CardText, CardActions} from 'react-toolbox/lib/card';
 import {Button} from 'react-toolbox/lib/button';
 import {Input} from 'react-toolbox/lib/input';
+import styles from './tasks.css';
+
+const TaskStatus = {
+  TODO: 'TODO',
+  DOING: 'DOING',
+  DONE: 'DONE',
+};
 
 class Task {
-  constructor(name, status) {
-    Task.id = Task.id + 1;
-    this.id = Task.id;
+
+  constructor(id, name, status) {
+    this.id = id;
     this.name = name;
-    if (status && status.todo) {
-      this.status = status;
-    } else {
-      this.status = {
-        todo: new Date(),
-        doing: null,
-        done: null,
-      }
-    }
+    this.status = status;
   }
 
-  doing() {
-    const now = new Date();
-    return new Task(this.name, {
-      todo: this.status.todo || now,
-      doing: now,
-      done: null,
-    });
+  get isTodo() {
+    return this.status === TaskStatus.TODO;
   }
 
-  done() {
-    const now = new Date();
-    return new Task(this.name, {
-      todo: this.status.todo || now,
-      doing: this.status.doing || now,
-      done: now,
-    })
-  }
-
-  get isWaiting() {
-    return !this.status.doing;
+  todo() {
+    return new Task(this.id, this.name, TaskStatus.TODO);
   }
 
   get isDoing() {
-    return this.status.doing && !this.status.done;
+    return this.status === TaskStatus.DOING;
+  }
+
+  doing() {
+    return new Task(this.id, this.name, TaskStatus.DOING);
   }
 
   get isDone() {
-    return !!this.status.done;
+    return this.status === TaskStatus.DONE;
+  }
+
+  done() {
+    return new Task(this.id, this.name, TaskStatus.DONE);
+  }
+
+  withName(name) {
+    return new Task(this.id, name, this.status);
+  }
+
+  save() {
+    console.log('Saving', this);
   }
 }
 
-Task.id = 0;
+let idBase = 0;
+
+Task.create = (name) => {
+  idBase = idBase + 1;
+  return new Task(`${new Date().toISOString()}-${idBase}`, name, TaskStatus.TODO);
+};
 
 const defaultList = [
-  new Task('Podlać kwiatki').done(),
-  new Task('Pozmywać naczynia').done(),
-  new Task('Nakarmić koty').doing(),
-  new Task('Zrobić pranie'),
-  new Task('Umówić się do lekarza'),
-  new Task('Kupić bilet na koncert Massive Attack'),
-  new Task('Posprzątać łazienkę'),
+  Task.create('Podlać kwiatki').done(),
+  Task.create('Pozmywać naczynia').done(),
+  Task.create('Nakarmić koty').doing(),
+  Task.create('Zrobić pranie'),
+  Task.create('Umówić się do lekarza'),
+  Task.create('Kupić bilet na koncert'),
+  Task.create('Posprzątać łazienkę'),
 ];
 
 const taskStyles = {
@@ -72,50 +77,77 @@ const taskStyles = {
   done: {
     backgroundColor: '#bd5',
   },
-  cardOuter: {
-    padding: '0.5em',
-  },
-  tasksContainer: {
-    margin: '-0.5em -1.5em',
-  },
 };
 
-function TaskView({task}) {
-  return (
-    <div style={taskStyles.cardOuter}>
-      <Card>
-        <CardTitle
-          title={task.name}
-          subtitle="Subtitle here"
+class TaskView extends React.Component {
+
+  state = {
+    tempName: this.props.task.name,
+  };
+
+  updateTempName = (tempName) => this.setState({tempName});
+
+  render() {
+
+    const task = this.props.task;
+    const tempName = this.state.tempName;
+    let taskButton = null;
+
+    if (task.isDone)
+      taskButton = (
+        <Button
+          label='Done'
+          style={taskStyles.done}
+          raised
+          onClick={() => task.todo().save()}
         />
-        <CardText>aaa</CardText>
-        <CardActions>
-          <Button
-            label='To do'
-            style={task.isWaiting && taskStyles.todo || {}}
-            raised={task.isWaiting}
+      );
+
+    else if (task.isDoing)
+      taskButton = (
+        <Button
+          label='To do'
+          style={taskStyles.doing}
+          raised
+          onClick={() => task.done().save()}
+        />
+      );
+
+    else
+      taskButton = (
+        <Button
+          label='Doing'
+          style={taskStyles.todo}
+          raised
+          onClick={() => task.doing().save()}
+        />
+      );
+
+    return (
+      <div className={styles.task}>
+        <div className={styles.taskButton}>
+          {taskButton}
+        </div>
+        <div className={styles.taskInput}>
+          <Input
+            type='text'
+            hint='Task name'
+            multiline
+            value={tempName}
+            onChange={this.updateTempName}
+            onBlur={() => task.withName(tempName).save()}
           />
-          <Button
-            label='Doing'
-            style={task.isDoing && taskStyles.doing || {}}
-            raised={task.isDoing}
-          />
-          <Button
-            label='Done'
-            style={task.isDone && taskStyles.done || {}}
-            raised={task.isDone}
-          />
-        </CardActions>
-      </Card>
-    </div>
-  );
+        </div>
+      </div>
+    );
+  }
 }
 
 export default function Tasks() {
   return (
     <div>
       <h1>Tasks</h1>
-      <div style={taskStyles.tasksContainer}>
+      <div>
         {defaultList.map(task => <TaskView key={task.id} task={task}/>)}
       </div>
     </div>
