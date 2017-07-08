@@ -9,3 +9,15 @@
 .taskInput {
     flex: 1;
 }
+
+.buttonTodo {
+    background-color: #eeeeee !important;
+}
+
+.buttonDoing {
+    background-color: #fdf09d !important;
+}
+
+.buttonDone {
+    background-color: #caf8bd !important;
+}
