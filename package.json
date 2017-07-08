@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "amazon-cognito-identity-js": "^1.18.0",
+    "pouchdb": "^6.2.0",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
