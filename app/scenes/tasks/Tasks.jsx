@@ -22,7 +22,7 @@ function Tasks({ tasks, updateTask }) {
 
 Tasks.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.instanceOf(Task)).isRequired,
-  updateTask: PropTypes.function.isRequired,
+  updateTask: PropTypes.func.isRequired,
 };
 
 const TasksExt = withTasks(Tasks);

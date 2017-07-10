@@ -59,7 +59,7 @@ export default class TaskView extends React.Component {
             multiline
             value={tempName}
             onChange={this.updateTempName}
-            onBlur={() => task.withName(tempName).save()}
+            onBlur={() => updateTask(task.withName(tempName))}
           />
         </div>
       </div>
@@ -69,5 +69,5 @@ export default class TaskView extends React.Component {
 
 TaskView.propTypes = {
   task: PropTypes.instanceOf(Task).isRequired,
-  updateTask: PropTypes.finction.isRequired,
+  updateTask: PropTypes.func.isRequired,
 };
