@@ -20,7 +20,7 @@ class Database {
           include_docs: true,
         })
         .on('change', listener)
-        .on('error', (err) => console.log(err));
+        .on('error', (err) => console.error(err));
   }
 
   removeChangeListener(name) {
@@ -30,9 +30,15 @@ class Database {
     }
   }
 
-  save(task) {
-    console.log('Storing', task.asDoc());
-    return this.db.put(task.asDoc());
+  create(doc) {
+    console.log('Creating', doc);
+    return this.db.put(doc);
+  }
+
+  update(updatedDoc) {
+    console.log('Updating', updatedDoc);
+    return this.db.get(updatedDoc._id)
+      .then((doc) => this.db.put({ ...doc, ...updatedDoc }));
   }
 
   getAll() {

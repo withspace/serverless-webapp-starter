@@ -9,6 +9,7 @@ module.exports = {
   "rules": {
     // disable detecting of unused PropTypes because it leads to many false positives for HoCs
     "react/no-unused-prop-types": 0,
-    "arrow-parens": ["error", "always"]
+    "arrow-parens": ["error", "always"],
+    "no-underscore-dangle": ["error", {"allow": ["_id"]}]
   }
 };

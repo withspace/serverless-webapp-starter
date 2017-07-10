@@ -10,27 +10,34 @@ export default function withTasks(WrappedComponent) {
     };
 
     componentDidMount() {
-      database.getAll().then((rows) => {
-        const tasks = rows.map((row) => Task.fromDoc(row.doc));
-        this.setState({ tasks });
-      });
-      database.addChangeListener(this.listenerName, this.handleChange);
+      this
+        .loadTasks()
+        .then(() => database.addChangeListener(this.listenerName, this.loadTasks));
     }
 
     componentWillUnmount() {
       database.removeChangeListener(this.listenerName);
     }
 
-    handleChange = (row) => {
-      console.log('Change', row);
-      const newTask = Task.fromDoc(row); // currently we support append-only
-      this.setState({ values: this.state.tasks.concat([newTask]) });
-    };
+    loadTasks = () =>
+      database
+        .getAll()
+        .then((rows) => {
+          const tasks = rows.map((row) => Task.fromDoc(row.doc));
+          this.setState({ tasks });
+        });
 
     listenerName = `${WithTasks.displayName}-${Math.floor((Math.random() * 9000) + 1000)}`;
 
     render() {
-      return <WrappedComponent tasks={this.state.tasks} {...this.props} />;
+      return (
+        <WrappedComponent
+          tasks={this.state.tasks}
+          createTask={(task) => database.create(task.asDoc())}
+          updateTask={(task) => database.update(task.asDoc())}
+          {...this.props}
+        />
+      );
     }
   }
 

@@ -14,7 +14,7 @@ export default class TaskView extends React.Component {
   updateTempName = (tempName) => this.setState({ tempName });
 
   render() {
-    const task = this.props.task;
+    const { task, updateTask } = this.props;
     const tempName = this.state.tempName;
     let taskButton = null;
 
@@ -24,7 +24,7 @@ export default class TaskView extends React.Component {
           label="Done"
           className={styles.buttonDone}
           raised
-          onClick={() => task.todo().save()}
+          onClick={() => updateTask(task.todo())}
         />
       );
     } else if (task.isDoing) {
@@ -33,7 +33,7 @@ export default class TaskView extends React.Component {
           label="Doing"
           className={styles.buttonDoing}
           raised
-          onClick={() => task.done().save()}
+          onClick={() => updateTask(task.done())}
         />
       );
     } else {
@@ -42,7 +42,7 @@ export default class TaskView extends React.Component {
           label="To do"
           className={styles.buttonTodo}
           raised
-          onClick={() => task.doing().save()}
+          onClick={() => updateTask(task.doing())}
         />
       );
     }
@@ -69,4 +69,5 @@ export default class TaskView extends React.Component {
 
 TaskView.propTypes = {
   task: PropTypes.instanceOf(Task).isRequired,
+  updateTask: PropTypes.finction.isRequired,
 };
