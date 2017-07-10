@@ -1,4 +1,3 @@
-
 export const TaskStatus = {
   TODO: 'TODO',
   DOING: 'DOING',
@@ -41,8 +40,12 @@ export class Task {
     return new Task(this.id, name, this.status);
   }
 
-  save() {
-    console.log('Saving', this);
+  asDoc() {
+    return {
+      _id: this.id,
+      name: this.name,
+      status: this.status,
+    };
   }
 }
 
@@ -53,3 +56,5 @@ Task.create = (name) => {
   return new Task(`${new Date().toISOString()}-${idBase}`, name, TaskStatus.TODO);
 };
 
+Task.fromDoc = ({ _id, name, status }) =>
+  new Task(_id, name, status);

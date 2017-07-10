@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-toolbox/lib/button';
 import { Input } from 'react-toolbox/lib/input';
 import styles from './tasks.css';
-import { Task } from './Task';
+import { Task } from '../../data';
 
 export default class TaskView extends React.Component {
 
@@ -30,7 +30,7 @@ export default class TaskView extends React.Component {
     } else if (task.isDoing) {
       taskButton = (
         <Button
-          label="To do"
+          label="Doing"
           className={styles.buttonDoing}
           raised
           onClick={() => task.done().save()}
@@ -39,7 +39,7 @@ export default class TaskView extends React.Component {
     } else {
       taskButton = (
         <Button
-          label="Doing"
+          label="To do"
           className={styles.buttonTodo}
           raised
           onClick={() => task.doing().save()}
