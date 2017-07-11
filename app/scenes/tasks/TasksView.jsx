@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Task, withTasks } from '../../data';
+import { Task, TaskRepository, withTasks } from '../../data';
 import TaskView from './TaskView';
 import CreateTaskView from './CreateTaskView';
 
-function Tasks({ tasks, updateTask, createTask, removeTask }) {
+function Tasks({ tasks, taskRepository }) {
   return (
     <div>
       <h1>Tasks</h1>
@@ -13,13 +13,13 @@ function Tasks({ tasks, updateTask, createTask, removeTask }) {
           <TaskView
             key={task.id}
             task={task}
-            updateTask={updateTask}
-            removeTask={removeTask}
+            updateTask={taskRepository.update}
+            removeTask={taskRepository.remove}
           />
         ))}
       </div>
       <div>
-        <CreateTaskView createTask={createTask} />
+        <CreateTaskView createTask={taskRepository.create} />
       </div>
     </div>
   );
@@ -27,9 +27,7 @@ function Tasks({ tasks, updateTask, createTask, removeTask }) {
 
 Tasks.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.instanceOf(Task)).isRequired,
-  updateTask: PropTypes.func.isRequired,
-  createTask: PropTypes.func.isRequired,
-  removeTask: PropTypes.func.isRequired,
+  taskRepository: PropTypes.instanceOf(TaskRepository).isRequired,
 };
 
 const TasksExt = withTasks(Tasks);

@@ -1,6 +1,6 @@
 import React from 'react';
 import database from './database';
-import { Task } from './Task';
+import TaskRepository from './TaskRepository';
 
 export default function withTasks(WrappedComponent) {
   class WithTasks extends React.Component {
@@ -19,23 +19,17 @@ export default function withTasks(WrappedComponent) {
       database.removeChangeListener(this.listenerName);
     }
 
-    loadTasks = () =>
-      database
-        .getAll()
-        .then((rows) => {
-          const tasks = rows.map((row) => Task.fromDoc(row.doc));
-          this.setState({ tasks });
-        });
+    loadTasks = () => this.taskRepository.getAll().then((tasks) => this.setState({ tasks }));
 
     listenerName = `${WithTasks.displayName}-${Math.floor((Math.random() * 9000) + 1000)}`;
+
+    taskRepository = new TaskRepository();
 
     render() {
       return (
         <WrappedComponent
           tasks={this.state.tasks}
-          createTask={(task) => database.create(task.asDoc())}
-          updateTask={(task) => database.update(task.asDoc())}
-          removeTask={(task) => database.remove(task.asDoc())}
+          taskRepository={this.taskRepository}
           {...this.props}
         />
       );

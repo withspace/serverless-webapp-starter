@@ -1,10 +1,9 @@
-import database from './database';
-import { Task, TaskStatus } from './Task';
+import { Task } from './Task';
+import TaskRepository from './TaskRepository';
 import withTasks from './withTasks';
 
 export {
-  database,
   Task,
-  TaskStatus,
+  TaskRepository,
   withTasks,
 };
