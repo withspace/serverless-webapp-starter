@@ -21,10 +21,8 @@ export default class TaskView extends React.Component {
   updateNameOrRemove = () => {
     const tempName = this.state.tempName;
     const { task, updateTask, removeTask } = this.props;
-    if (tempName && tempName.length) {
-      return updateTask(task.withName(tempName));
-    }
-    return removeTask(task);
+    if (!tempName || !tempName.length) { removeTask(task); } else
+    if (tempName !== task.name) { updateTask(task.withName(tempName)); }
   };
 
   render() {
