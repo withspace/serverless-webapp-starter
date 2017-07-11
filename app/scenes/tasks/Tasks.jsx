@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Task, withTasks } from '../../data';
 import TaskView from './TaskView';
+import CreateTaskView from './CreateTaskView';
 
-function Tasks({ tasks, updateTask }) {
+function Tasks({ tasks, updateTask, createTask }) {
   return (
     <div>
       <h1>Tasks</h1>
@@ -16,6 +17,9 @@ function Tasks({ tasks, updateTask }) {
           />
         ))}
       </div>
+      <div>
+        <CreateTaskView createTask={createTask}/>
+      </div>
     </div>
   );
 }
@@ -23,6 +27,7 @@ function Tasks({ tasks, updateTask }) {
 Tasks.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.instanceOf(Task)).isRequired,
   updateTask: PropTypes.func.isRequired,
+  createTask: PropTypes.func.isRequired,
 };
 
 const TasksExt = withTasks(Tasks);
