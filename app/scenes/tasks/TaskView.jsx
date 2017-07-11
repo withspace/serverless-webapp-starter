@@ -13,6 +13,15 @@ export default class TaskView extends React.Component {
 
   updateTempName = (tempName) => this.setState({ tempName });
 
+  updateNameOrRemove = () => {
+    const tempName = this.state.tempName;
+    const { task, updateTask, removeTask } = this.props;
+    if (tempName && tempName.length) {
+      return updateTask(task.withName(tempName));
+    }
+    return removeTask(task);
+  };
+
   render() {
     const { task, updateTask } = this.props;
     const tempName = this.state.tempName;
@@ -59,7 +68,7 @@ export default class TaskView extends React.Component {
             multiline
             value={tempName}
             onChange={this.updateTempName}
-            onBlur={() => updateTask(task.withName(tempName))}
+            onBlur={this.updateNameOrRemove}
           />
         </div>
       </div>
@@ -70,4 +79,5 @@ export default class TaskView extends React.Component {
 TaskView.propTypes = {
   task: PropTypes.instanceOf(Task).isRequired,
   updateTask: PropTypes.func.isRequired,
+  removeTask: PropTypes.func.isRequired,
 };

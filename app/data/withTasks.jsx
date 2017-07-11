@@ -35,6 +35,7 @@ export default function withTasks(WrappedComponent) {
           tasks={this.state.tasks}
           createTask={(task) => database.create(task.asDoc())}
           updateTask={(task) => database.update(task.asDoc())}
+          removeTask={(task) => database.remove(task.asDoc())}
           {...this.props}
         />
       );

@@ -4,7 +4,7 @@ import { Task, withTasks } from '../../data';
 import TaskView from './TaskView';
 import CreateTaskView from './CreateTaskView';
 
-function Tasks({ tasks, updateTask, createTask }) {
+function Tasks({ tasks, updateTask, createTask, removeTask }) {
   return (
     <div>
       <h1>Tasks</h1>
@@ -14,11 +14,12 @@ function Tasks({ tasks, updateTask, createTask }) {
             key={task.id}
             task={task}
             updateTask={updateTask}
+            removeTask={removeTask}
           />
         ))}
       </div>
       <div>
-        <CreateTaskView createTask={createTask}/>
+        <CreateTaskView createTask={createTask} />
       </div>
     </div>
   );
@@ -28,6 +29,7 @@ Tasks.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.instanceOf(Task)).isRequired,
   updateTask: PropTypes.func.isRequired,
   createTask: PropTypes.func.isRequired,
+  removeTask: PropTypes.func.isRequired,
 };
 
 const TasksExt = withTasks(Tasks);

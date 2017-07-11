@@ -41,6 +41,12 @@ class Database {
       .then((doc) => this.db.put({ ...doc, ...updatedDoc }));
   }
 
+  remove(docToRemove) {
+    console.log('Removing', docToRemove);
+    return this.db.get(docToRemove._id)
+      .then((doc) => this.db.remove(doc));
+  }
+
   getAll() {
     const opts = { include_docs: true };
     return this.db.allDocs(opts).then(({ rows }) => rows);
