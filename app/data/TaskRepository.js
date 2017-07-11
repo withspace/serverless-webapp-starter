@@ -1,23 +1,28 @@
 import database from './database';
 import { Task } from './Task';
 
+function taskFromDoc({ _id, name, status }) {
+  return new Task(_id, name, status);
+}
+
+function taskToDoc(task) {
+  return {
+    _id: task.id,
+    name: task.name,
+    status: task.status,
+  };
+}
+
 export default class TaskRepository {
 
-  database = database;
+  getAll = () =>
+    database
+      .getAll()
+      .then((rows) => rows.map((row) => taskFromDoc(row.doc)));
 
-  getAll() {
-    return this.database.getAll().then((rows) => rows.map((row) => Task.fromDoc(row.doc)));
-  }
+  create = (task) => database.create(taskToDoc(task));
 
-  create(task) {
-    return this.database.create(task.asDoc());
-  }
+  update = (task) => database.update(taskToDoc(task));
 
-  update(task) {
-    return this.database.update(task.asDoc());
-  }
-
-  remove(task) {
-    return this.database.remove(task.asDoc());
-  }
+  remove = (task) => database.remove(taskToDoc(task));
 }

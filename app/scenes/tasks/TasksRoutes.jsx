@@ -1,8 +1,8 @@
 import React from 'react';
 import { DefaultRoute } from '../../components/routes';
-import Tasks from './TasksView';
+import TasksView from './TasksView';
 
 export default function TasksRoutes() {
-  return <DefaultRoute path="/tasks" component={Tasks} />;
+  return <DefaultRoute path="/tasks" component={TasksView} />;
 }
 

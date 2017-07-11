@@ -39,14 +39,6 @@ export class Task {
   withName(name) {
     return new Task(this.id, name, this.status);
   }
-
-  asDoc() {
-    return {
-      _id: this.id,
-      name: this.name,
-      status: this.status,
-    };
-  }
 }
 
 let idBase = 0;
@@ -55,6 +47,3 @@ Task.create = (name) => {
   idBase += 1;
   return new Task(`${new Date().toISOString()}-${idBase}`, name, TaskStatus.TODO);
 };
-
-Task.fromDoc = ({ _id, name, status }) =>
-  new Task(_id, name, status);
