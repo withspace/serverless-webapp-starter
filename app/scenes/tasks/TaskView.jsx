@@ -11,6 +11,11 @@ export default class TaskView extends React.Component {
     tempName: this.props.task.name,
   };
 
+  componentWillReceiveProps(nextProps) {
+    const nextTaskName = nextProps.task.name;
+    if (nextTaskName !== this.state.tempName) { this.setState({ tempName: nextTaskName }); }
+  }
+
   updateTempName = (tempName) => this.setState({ tempName });
 
   updateNameOrRemove = () => {
